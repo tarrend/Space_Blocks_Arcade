@@ -11,5 +11,12 @@ title_text_surface = title_text_font.render("Space Blocks Arcade!", False, "whit
 title_text_rect = title_text_surface.get_rect()
 title_text_rect.center = pygame.Vector2(WIDTH/2, 150)
 
+def rendering():
+    print("rendering")
+
+def updating():
+    print("updating")
+
 def run():
-    print("running")
+    rendering()
+    updating()

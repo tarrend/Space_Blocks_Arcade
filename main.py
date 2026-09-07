@@ -1,6 +1,8 @@
 import pygame
 from constants import *
 
+pygame.init()
+
 # initial variables
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Space Blocks Arcade")
