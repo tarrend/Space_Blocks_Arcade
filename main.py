@@ -8,6 +8,8 @@ clock = pygame.time.Clock()
 dt = 0
 running = True
 
+import gameplay
+
 
 # main loop
 while running:
@@ -25,6 +27,8 @@ while running:
 
     # game updating and rendering
     screen.fill("#0d002b")
+
+    gameplay.run()
 
     pygame.display.update()
 
