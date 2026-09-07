@@ -6,17 +6,20 @@ from constants import *
 # however it does not contain sprites or many classes it is mainly just running
 # that being said it does contain some basic objects
 
-title_text_font = pygame.Font(None, 30)
-title_text_surface = title_text_font.render("Space Blocks Arcade!", False, "white")
+title_text_font = pygame.Font(None, 50)
+title_text_surface = title_text_font.render("Space Blocks Arcade!", True, "white")
 title_text_rect = title_text_surface.get_rect()
-title_text_rect.center = pygame.Vector2(WIDTH/2, 150)
+title_text_rect.center = pygame.Vector2(WIDTH/2, 100)
 
-def rendering():
-    print("rendering")
+def rendering(screen):
+
+    # displaying different text
+    screen.blit(title_text_surface, title_text_rect)
+    
 
 def updating():
-    print("updating")
+    pass
 
-def run():
-    rendering()
+def run(screen):
+    rendering(screen)
     updating()

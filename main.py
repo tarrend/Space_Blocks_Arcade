@@ -30,7 +30,7 @@ while running:
     # game updating and rendering
     screen.fill("#0d002b")
 
-    gameplay.run()
+    gameplay.run(screen)
 
     pygame.display.update()
 
