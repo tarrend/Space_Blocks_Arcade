@@ -8,8 +8,7 @@ from constants import *
 
 title_text_font = pygame.Font(None, 50)
 title_text_surface = title_text_font.render("Space Blocks Arcade!", True, "white")
-title_text_rect = title_text_surface.get_rect()
-title_text_rect.center = pygame.Vector2(WIDTH/2, 100)
+title_text_rect = title_text_surface.get_rect(center = pygame.Vector2(WIDTH/2, 100))
 
 def rendering(screen):
 
