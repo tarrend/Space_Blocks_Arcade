@@ -32,13 +32,37 @@ def rendering(screen):
     # displaying different text
     screen.blit(title_text_surface, title_text_rect)
 
-    
+# different game timers and systems
+shoot_timer = 0
+shoot_time = 0.5
+can_shoot = True
+
+def timers(dt):
+
+    # shooting
+    global shoot_timer
+    global can_shoot
+
+    if shoot_timer < shoot_time:
+        shoot_timer += dt
+    else:
+        shoot_timer -= shoot_time
+
+        if not can_shoot:
+            can_shoot = True
+
+
+
+
 
 def updating(dt, key):
 
     # updating the different groups
     player_group.update(dt, key)
     laser_group.update(dt)
+
+    # run the different game timers
+    timers(dt)
 
 def run(screen, dt, key):
     rendering(screen)
