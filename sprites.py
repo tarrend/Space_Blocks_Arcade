@@ -7,7 +7,7 @@ class Ship(pygame.sprite.Sprite):
         super().__init__()
 
         # intial variables
-        self.image_width = 100
+        self.image_width = 80
         self.image = pygame.Surface((self.image_width, self.image_width))
         self.image.fill("#3b96eb")
 
@@ -43,6 +43,17 @@ class Ship(pygame.sprite.Sprite):
 
         # add this to position
         self.position += velocity * dt
+
+        # apply borders
+        rect_size_half = self.image_width/2
+        if self.position.x - rect_size_half < 0:
+            self.position.x = rect_size_half
+        if self.position.x + rect_size_half > WIDTH:
+            self.position.x = WIDTH - rect_size_half
+        if self.position.y - rect_size_half < 0:
+            self.position.y = rect_size_half
+        if self.position.y + rect_size_half > HEIGHT:
+            self.position.y = HEIGHT - rect_size_half
         
         # set the rects center to the position
         self.rect.center = self.position
