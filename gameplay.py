@@ -59,19 +59,19 @@ def shoot(key_just, position):
         laser_group.add(sprites.Laser(position))
         can_shoot = False
 
-
-
 def updating(dt, key, key_just):
 
     # updating the different groups
-    player_group.update(dt, key_just)
+    player_group.update(dt, key)
     laser_group.update(dt)
 
     # run the different game timers
     timers(dt)
 
     # shooting mechanic
-    shoot(key, player.position)
+    laser_spawn_pos = player.position.copy()
+    laser_spawn_pos.y -= 40
+    shoot(key_just, laser_spawn_pos)
 
 def run(screen, dt, key, key_just):
     updating(dt, key, key_just)
