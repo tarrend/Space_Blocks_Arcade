@@ -85,3 +85,19 @@ class Ship(pygame.sprite.Sprite):
 
     def update(self, dt, key):
         self.movement(dt, key)
+
+class Laser(pygame.sprite.Sprite):
+    def __init__(self, position):
+        super().__init__()
+
+        # initial variables
+
+        self.image = pygame.Surface((0, 0), (12, 2))
+        self.image.fill("#ffdd30")
+        self.rect = self.image.get_rect()
+
+        # positioning
+        self.position = position
+        self.speed = 800
+
+        self.rect.center = self.position
