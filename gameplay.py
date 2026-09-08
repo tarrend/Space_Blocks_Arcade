@@ -23,7 +23,6 @@ def rendering(screen):
     player_group.draw(screen)
 
 
-
     # displaying different text
     screen.blit(title_text_surface, title_text_rect)
     
