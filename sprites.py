@@ -47,6 +47,9 @@ class Ship(pygame.sprite.Sprite):
         # set the rects center to the position
         self.rect.center = self.position
 
+        # apply borders
+        half_width = self.image_width/2
+
 
 
     def update(self, dt, key):
