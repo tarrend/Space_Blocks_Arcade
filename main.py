@@ -30,7 +30,11 @@ while running:
     # game updating and rendering
     screen.fill("#0d002b")
 
-    gameplay.run(screen)
+    # get inputs
+    key = pygame.key.get_pressed()
+    key_just = pygame.key.get_just_pressed()
+
+    gameplay.run(screen, dt, key, key_just)
 
     pygame.display.update()
 
