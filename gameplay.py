@@ -20,6 +20,12 @@ title_text_font = pygame.Font(None, 50)
 title_text_surface = title_text_font.render("Space Blocks Arcade!", True, "white")
 title_text_rect = title_text_surface.get_rect(center = pygame.Vector2(WIDTH/2, 100))
 
+# reloading text
+reloading_text_font = pygame.Font(None, 35)
+reloading_text_surface = reloading_text_font.render("Reloading...", True, "#c90e1e")
+reloading_text_rect = reloading_text_surface.get_rect(center = pygame.Vector2(100, 50))
+reloading = True
+
 def rendering(screen):
     # rendering the different groups
     player.display_extras(screen)
@@ -31,6 +37,9 @@ def rendering(screen):
 
     # displaying different text
     screen.blit(title_text_surface, title_text_rect)
+
+    if reloading:
+        screen.blit(reloading_text_surface, reloading_text_rect)
 
 # different game timers and systems
 shoot_timer = 0
