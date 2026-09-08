@@ -7,11 +7,63 @@ class Ship(pygame.sprite.Sprite):
         super().__init__()
 
         # intial variables
-        self.image = pygame.Surface((50, 50))
-        self.image = pygame.transform.rotate(self.image, 45)
+        self.image_width = 50
+        self.image = pygame.Surface((self.image_width, self.image_width))
         self.image.fill("#3b96eb")
 
-        self.rect = pygame.Rect((0, 0), (40, 40))
+        self.rect_width = 40
+        self.rect = pygame.Rect((0, 0), (self.rect_width, self.rect_width))
         self.rect.center = pygame.Vector2(WIDTH/2, HEIGHT-200)
 
+        # related to movement
+        self.position = pygame.Vector2(WIDTH/2, HEIGHT-200)
+        self.speed = 250
 
+    def movement(self, dt, key):
+
+
+        # apply borders
+        rect_size_half = self.rect_width/2
+        if self.rect.left < 0:
+            self.position.x = rect_size_half
+        if self.rect.right > WIDTH:
+            self.position.x = WIDTH - rect_size_half
+        if self.rect.top < 0:
+            self.position.y = rect_size_half
+        if self.rect.bottom > HEIGHT:
+            self.position.y = HEIGHT - rect_size_half
+
+        direction = pygame.Vector2(0, 0)
+
+        # get input
+        if key[pygame.K_LEFT]:
+            direction.x = -1
+        elif key[pygame.K_RIGHT]:
+            direction.x = 1
+        else:
+            direction.x = 0
+
+        if key[pygame.K_UP]:
+            direction.y = -1
+        elif key[pygame.K_DOWN]:
+            direction.y = 1
+        else:
+            direction.update
+
+        # normalize and apply speed
+        if direction.length() > 0:
+            direction = direction.normalize()
+        velocity = direction * self.speed
+
+        # add this to position
+        self.position += velocity * dt
+        
+        # set the rects center to the position
+        self.rect.center = self.position
+
+
+
+
+
+    def update(self, dt, key):
+        self.movement(dt, key)

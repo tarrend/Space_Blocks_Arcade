@@ -19,17 +19,21 @@ title_text_surface = title_text_font.render("Space Blocks Arcade!", True, "white
 title_text_rect = title_text_surface.get_rect(center = pygame.Vector2(WIDTH/2, 100))
 
 def rendering(screen):
+    # rendering the different groups
+    player_group.draw(screen)
+
+
 
     # displaying different text
     screen.blit(title_text_surface, title_text_rect)
-
-    # rendering the different groups
-    player_group.draw(screen)
+    
     
 
-def updating():
-    pass
+def updating(dt, key):
 
-def run(screen):
+    # updating the different groups
+    player_group.update(dt, key)
+
+def run(screen, dt, key):
     rendering(screen)
-    updating()
+    updating(dt, key)
