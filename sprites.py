@@ -92,7 +92,7 @@ class Laser(pygame.sprite.Sprite):
 
         # initial variables
 
-        self.image = pygame.Surface((0, 0), (12, 2))
+        self.image = pygame.Surface((4, 24))
         self.image.fill("#ffdd30")
         self.rect = self.image.get_rect()
 
@@ -101,3 +101,17 @@ class Laser(pygame.sprite.Sprite):
         self.speed = 800
 
         self.rect.center = self.position
+
+    def movement(self, dt):
+
+        # move upwards
+        self.position.y -= self.speed * dt
+
+        self.rect.center = self.position
+
+        # check if the laser is off screen, if it is destroy the laser
+        if self.position.y < -20:
+            self.kill()
+
+    def update(self, dt):
+        self.movement(dt)

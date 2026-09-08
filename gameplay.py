@@ -9,10 +9,12 @@ import sprites
 
 # groups
 player_group = pygame.sprite.GroupSingle()
+laser_group = pygame.sprite.Group()
 
 # add sprites to groups
 player_group.add(sprites.Ship())
 player = player_group.sprite
+laser_group.add(sprites.Laser(pygame.Vector2(WIDTH/2, HEIGHT)))
 
 # title text
 title_text_font = pygame.Font(None, 50)
@@ -23,7 +25,8 @@ def rendering(screen):
     # rendering the different groups
     player.display_extras(screen)
     player_group.draw(screen)
-    
+
+    laser_group.draw(screen)
 
 
 
@@ -36,6 +39,7 @@ def updating(dt, key):
 
     # updating the different groups
     player_group.update(dt, key)
+    laser_group.update(dt)
 
 def run(screen, dt, key):
     rendering(screen)
