@@ -7,17 +7,31 @@ class Ship(pygame.sprite.Sprite):
         super().__init__()
 
         # intial variables
-        self.image_width = 100
+        self.image_width = 50
         self.image = pygame.Surface((self.image_width, self.image_width))
         self.image.fill("#3b96eb")
 
-        self.rect = self.image.get_rect(center=pygame.Vector2(WIDTH/2, HEIGHT-200))
+        self.rect_width = 40
+        self.rect = pygame.Rect((0, 0), (self.rect_width, self.rect_width))
+        self.rect.center = pygame.Vector2(WIDTH/2, HEIGHT-200)
 
         # related to movement
         self.position = pygame.Vector2(WIDTH/2, HEIGHT-200)
         self.speed = 250
 
     def movement(self, dt, key):
+
+
+        # apply borders
+        rect_size_half = self.rect_width/2
+        if self.rect.left < 0:
+            self.position.x = rect_size_half
+        if self.rect.right > WIDTH:
+            self.position.x = WIDTH - rect_size_half
+        if self.rect.top < 0:
+            self.position.y = rect_size_half
+        if self.rect.bottom > HEIGHT:
+            self.position.y = HEIGHT - rect_size_half
 
         direction = pygame.Vector2(0, 0)
 
@@ -47,8 +61,7 @@ class Ship(pygame.sprite.Sprite):
         # set the rects center to the position
         self.rect.center = self.position
 
-        # apply borders
-        half_width = self.image_width/2
+
 
 
 
