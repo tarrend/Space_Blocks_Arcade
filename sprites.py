@@ -7,7 +7,7 @@ class Ship(pygame.sprite.Sprite):
         super().__init__()
 
         # intial variables
-        self.image_width = 80
+        self.image_width = 50
         self.image_width_half = self.image_width/2
         self.image = pygame.Surface((self.image_width, self.image_width))
         self.image.fill("#3b96eb")
@@ -15,7 +15,7 @@ class Ship(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=pygame.Vector2(WIDTH/2, HEIGHT-200))
 
         # wings
-        self.wing_rect = pygame.Rect((0, 0), (80, 30))
+        self.wing_rect = pygame.Rect((0, 0), (70, 15))
         self.wing_rect_2 = self.wing_rect.copy()
 
         self.wing_rect.center = pygame.Vector2(WIDTH/2-self.image_width_half, HEIGHT-200)
