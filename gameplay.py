@@ -14,7 +14,6 @@ laser_group = pygame.sprite.Group()
 # add sprites to groups
 player_group.add(sprites.Ship())
 player = player_group.sprite
-laser_group.add(sprites.Laser(pygame.Vector2(WIDTH/2, HEIGHT)))
 
 # title text
 title_text_font = pygame.Font(None, 50)
@@ -32,7 +31,7 @@ def rendering(screen):
 
     # displaying different text
     screen.blit(title_text_surface, title_text_rect)
-    
+
     
 
 def updating(dt, key):
