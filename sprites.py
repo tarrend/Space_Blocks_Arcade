@@ -8,10 +8,18 @@ class Ship(pygame.sprite.Sprite):
 
         # intial variables
         self.image_width = 80
+        self.image_width_half = self.image_width/2
         self.image = pygame.Surface((self.image_width, self.image_width))
         self.image.fill("#3b96eb")
 
         self.rect = self.image.get_rect(center=pygame.Vector2(WIDTH/2, HEIGHT-200))
+
+        # wings
+        self.wing_rect = pygame.Rect((0, 0), (80, 30))
+        self.wing_rect_2 = self.wing_rect.copy()
+
+        self.wing_rect.center = pygame.Vector2(WIDTH/2-self.image_width_half, HEIGHT-200)
+        self.wing_rect_2.center = pygame.Vector2(WIDTH/2+self.image_width_half, HEIGHT-200)
 
         # related to movement
         self.position = pygame.Vector2(WIDTH/2, HEIGHT-200)
@@ -45,20 +53,27 @@ class Ship(pygame.sprite.Sprite):
         self.position += velocity * dt
 
         # apply borders
-        rect_size_half = self.image_width/2
-        if self.position.x - rect_size_half < 0:
-            self.position.x = rect_size_half
-        if self.position.x + rect_size_half > WIDTH:
-            self.position.x = WIDTH - rect_size_half
-        if self.position.y - rect_size_half < 0:
-            self.position.y = rect_size_half
-        if self.position.y + rect_size_half > HEIGHT:
-            self.position.y = HEIGHT - rect_size_half
+        if self.position.x - self.image_width_half < 0:
+            self.position.x = self.image_width_half
+        if self.position.x + self.image_width_half > WIDTH:
+            self.position.x = WIDTH - self.image_width_half
+        if self.position.y - self.image_width_half < 0:
+            self.position.y = self.image_width_half
+        if self.position.y + self.image_width_half > HEIGHT:
+            self.position.y = HEIGHT - self.image_width_half
+
+        # change the position of the parts of the sprite
+        self.wing_rect.center = pygame.Vector2(self.position.x-self.image_width_half, self.position.y)
+        self.wing_rect_2.center = pygame.Vector2(self.position.x+self.image_width_half, self.position.y)
         
         # set the rects center to the position
         self.rect.center = self.position
 
+    def display_extras(self, screen):
 
+        # draw wings
+        pygame.draw.rect(screen, "#204de3", self.wing_rect)
+        pygame.draw.rect(screen, "#204de3", self.wing_rect_2)
 
     def update(self, dt, key):
         self.movement(dt, key)

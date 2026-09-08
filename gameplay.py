@@ -12,6 +12,7 @@ player_group = pygame.sprite.GroupSingle()
 
 # add sprites to groups
 player_group.add(sprites.Ship())
+player = player_group.sprite
 
 # title text
 title_text_font = pygame.Font(None, 50)
@@ -20,7 +21,10 @@ title_text_rect = title_text_surface.get_rect(center = pygame.Vector2(WIDTH/2, 1
 
 def rendering(screen):
     # rendering the different groups
+    player.display_extras(screen)
     player_group.draw(screen)
+    
+
 
 
     # displaying different text
