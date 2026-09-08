@@ -14,12 +14,15 @@ class Ship(pygame.sprite.Sprite):
 
         self.rect = self.image.get_rect(center=pygame.Vector2(WIDTH/2, HEIGHT-200))
 
-        # wings
+        # wings and laser gun
         self.wing_rect = pygame.Rect((0, 0), (70, 15))
         self.wing_rect_2 = self.wing_rect.copy()
 
         self.wing_rect.center = pygame.Vector2(WIDTH/2-self.image_width_half, HEIGHT-200)
         self.wing_rect_2.center = pygame.Vector2(WIDTH/2+self.image_width_half, HEIGHT-200)
+
+        self.laser_gun_rect = pygame.Rect((0, 0), (16, 12))
+        self.laser_gun_rect.center = pygame.Vector2(WIDTH/2, HEIGHT-206-self.image_width_half)
 
         # related to movement
         self.position = pygame.Vector2(WIDTH/2, HEIGHT-200)
@@ -65,6 +68,8 @@ class Ship(pygame.sprite.Sprite):
         # change the position of the parts of the sprite
         self.wing_rect.center = pygame.Vector2(self.position.x-self.image_width_half, self.position.y)
         self.wing_rect_2.center = pygame.Vector2(self.position.x+self.image_width_half, self.position.y)
+
+        self.laser_gun_rect.center = pygame.Vector2(self.position.x, self.position.y-self.image_width_half-6)
         
         # set the rects center to the position
         self.rect.center = self.position
@@ -74,6 +79,9 @@ class Ship(pygame.sprite.Sprite):
         # draw wings
         pygame.draw.rect(screen, "#204de3", self.wing_rect)
         pygame.draw.rect(screen, "#204de3", self.wing_rect_2)
+
+        # draw laser gun
+        pygame.draw.rect(screen, "#eb4c1c", self.laser_gun_rect)
 
     def update(self, dt, key):
         self.movement(dt, key)
