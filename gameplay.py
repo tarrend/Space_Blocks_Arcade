@@ -34,7 +34,7 @@ def rendering(screen):
 
 # different game timers and systems
 shoot_timer = 0
-shoot_time = 0.5
+shoot_time = 1
 can_shoot = True
 
 def timers(dt):
@@ -43,12 +43,11 @@ def timers(dt):
     global shoot_timer
     global can_shoot
 
-    if shoot_timer < shoot_time:
-        shoot_timer += dt
-    else:
-        shoot_timer -= shoot_time
-
-        if not can_shoot:
+    if not can_shoot:
+        if shoot_timer < shoot_time:
+            shoot_timer += dt
+        else:
+            shoot_timer -= shoot_time
             can_shoot = True
 
 def shoot(key_just, position):
