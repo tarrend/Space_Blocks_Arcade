@@ -22,9 +22,6 @@ title_text_rect = title_text_surface.get_rect(center = pygame.Vector2(WIDTH/2, 1
 
 # reloading text
 reloading_text_font = pygame.Font(None, 35)
-reloading_text_surface = reloading_text_font.render("Reloading...", True, "#c90e1e")
-reloading_text_rect = reloading_text_surface.get_rect(center = pygame.Vector2(100, 50))
-reloading = True
 
 def rendering(screen):
     # rendering the different groups
@@ -38,8 +35,14 @@ def rendering(screen):
     # displaying different text
     screen.blit(title_text_surface, title_text_rect)
 
-    if reloading:
-        screen.blit(reloading_text_surface, reloading_text_rect)
+    # reloading text
+    if not can_shoot:
+        reloading_time = shoot_time - shoot_timer
+        if reloading_time <= 0:
+            reloading_time = 0
+        reloading_text_text = f"Reloading... ({reloading_time:.1f})"
+        reloading_text_surface = reloading_text_font.render(reloading_text_text, True, "#c90e1e")
+        screen.blit(reloading_text_surface, pygame.Vector2(50, 50))
 
 # different game timers and systems
 shoot_timer = 0
