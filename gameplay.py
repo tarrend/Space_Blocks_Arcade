@@ -1,4 +1,5 @@
 import pygame
+from random import uniform
 from constants import *
 import sprites
 
@@ -16,8 +17,6 @@ meteor_group = pygame.sprite.Group()
 player_group.add(sprites.Ship())
 player = player_group.sprite
 
-meteor_group.add(sprites.Meteor())
-
 # title text
 title_text_font = pygame.Font(None, 50)
 title_text_surface = title_text_font.render("Space Blocks Arcade!", True, "white")
@@ -31,6 +30,9 @@ shoot_timer = 0
 shoot_time = 1
 can_shoot = True
 
+meteor_timer = 0
+meteor_time = 0.5
+
 def timers(dt):
 
     # shooting
@@ -43,6 +45,21 @@ def timers(dt):
         else:
             shoot_timer -= shoot_time
             can_shoot = True
+
+    # meteors
+    global meteor_timer
+    global meteor_time
+    global meteor_count
+
+
+    if meteor_timer < meteor_time:
+        meteor_timer += dt
+    else:
+        meteor_timer -= meteor_time
+        meteor_time = uniform(0.5, 1.0)
+
+        # add the meteor
+        meteor_group.add(sprites.Meteor())
 
 def shoot(key_just, position):
 
