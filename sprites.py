@@ -1,5 +1,7 @@
 import pygame
+from random import randint
 from constants import *
+
 
 # this file contains the different sprites for the game
 class Ship(pygame.sprite.Sprite):
@@ -85,6 +87,23 @@ class Ship(pygame.sprite.Sprite):
 
     def update(self, dt, key):
         self.movement(dt, key)
+
+class Meteor(pygame.sprite.Sprite):
+    def __init__(self, position):
+        super().__init__()
+
+        # initial variables
+
+        random_size = randint(8, 12)
+
+        self.image = pygame.Surface((random_size, random_size))
+        self.image.fill("azure3")
+        self.rect = self.image.get_rect()
+
+        # movement
+        self.position = position
+        self.speed = randint(100, 150)
+        self.direction = pygame.Vector2(randint(-25, 25), -1)
 
 class Laser(pygame.sprite.Sprite):
     def __init__(self, position):
