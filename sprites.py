@@ -115,6 +115,10 @@ class Meteor(pygame.sprite.Sprite):
         # move the rect to the position
         self.rect.center = self.position
 
+        # despawn the meteor
+        if self.position.y > HEIGHT + 65:
+            self.kill()
+
     def update(self, dt):
         self.movement(dt)
 
