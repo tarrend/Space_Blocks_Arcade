@@ -112,7 +112,6 @@ class Meteor(pygame.sprite.Sprite):
         # move the meteor
         velocity = self.direction * self.speed
         self.position += velocity * dt
-        print(self.position)
 
         # move the rect to the position
         self.rect.center = self.position
