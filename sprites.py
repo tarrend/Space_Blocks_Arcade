@@ -103,7 +103,7 @@ class Meteor(pygame.sprite.Sprite):
         # movement
         self.position = pygame.Vector2(randint(0, WIDTH), randint(-120, -80))
         self.speed = randint(250, 300)
-        self.direction = pygame.Vector2(uniform(-1, 1), 1).normalize()
+        self.direction = pygame.Vector2(uniform(-0.2, 0.2), 1).normalize()
 
         self.rect.center = self.position
 
