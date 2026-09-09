@@ -31,7 +31,7 @@ shoot_time = 1
 can_shoot = True
 
 meteor_timer = 0
-meteor_time = 0.5
+meteor_time = 0.2
 
 def timers(dt):
 
@@ -56,7 +56,7 @@ def timers(dt):
         meteor_timer += dt
     else:
         meteor_timer -= meteor_time
-        meteor_time = uniform(0.5, 1.0)
+        meteor_time = uniform(0.2, 0.5)
 
         # add the meteor
         meteor_group.add(sprites.Meteor())

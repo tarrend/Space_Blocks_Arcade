@@ -102,7 +102,7 @@ class Meteor(pygame.sprite.Sprite):
 
         # movement
         self.position = pygame.Vector2(randint(0, WIDTH), randint(-120, -80))
-        self.speed = randint(150, 200)
+        self.speed = randint(250, 300)
         self.direction = pygame.Vector2(uniform(-1, 1), 1).normalize()
 
         self.rect.center = self.position
@@ -130,7 +130,7 @@ class Laser(pygame.sprite.Sprite):
 
         # initial variables
 
-        self.image = pygame.Surface((4, 24))
+        self.image = pygame.Surface((10, 50))
         self.image.fill("#ffdd30")
         self.rect = self.image.get_rect()
 
@@ -148,7 +148,7 @@ class Laser(pygame.sprite.Sprite):
         self.rect.center = self.position
 
         # check if the laser is off screen, if it is destroy the laser
-        if self.position.y < -20:
+        if self.position.y < -50:
             self.kill()
 
     def update(self, dt):
