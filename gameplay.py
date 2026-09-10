@@ -35,6 +35,9 @@ meteor_time = 0.2
 # score
 score = 0
 
+# pause
+pause = False
+
 def timers(dt):
 
     # shooting
@@ -115,5 +118,15 @@ def rendering(screen):
 
 
 def run(screen, dt, key, key_just):
-    updating(dt, key, key_just)
+
+    global pause
+
+    if not pause:
+        # only continue updating the game if its not paused
+        updating(dt, key, key_just)
+
     rendering(screen)
+
+    # check if the player decides to pause the game
+    if key_just[pygame.K_SPACE]:
+        pause = not pause
