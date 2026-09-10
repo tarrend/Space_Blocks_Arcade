@@ -32,6 +32,9 @@ can_shoot = True
 meteor_timer = 0
 meteor_time = 0.2
 
+# score
+score = 0
+
 def timers(dt):
 
     # shooting
@@ -48,7 +51,6 @@ def timers(dt):
     # meteors
     global meteor_timer
     global meteor_time
-    global meteor_count
 
 
     if meteor_timer < meteor_time:
@@ -96,6 +98,11 @@ def rendering(screen):
     # displaying different text
     screen.blit(title_text_surface, title_text_rect)
 
+
+    # score text
+    score_surface = size_35_font.render("Score: " + str(score), True, "#fcea42")
+    screen.blit(score_surface, pygame.Vector2(50, 50))
+
     # reloading text
     if not can_shoot:
         reloading_time = shoot_time - shoot_timer
@@ -103,7 +110,8 @@ def rendering(screen):
             reloading_time = 0
         reloading_text_text = f"Reloading... ({reloading_time:.1f})"
         reloading_text_surface = size_35_font.render(reloading_text_text, True, "#c90e1e")
-        screen.blit(reloading_text_surface, pygame.Vector2(50, 50))
+        screen.blit(reloading_text_surface, pygame.Vector2(50, 100))
+
 
 
 def run(screen, dt, key, key_just):
