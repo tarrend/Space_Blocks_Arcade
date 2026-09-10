@@ -152,3 +152,19 @@ class Laser(pygame.sprite.Sprite):
 
     def update(self, dt):
         self.movement(dt)
+
+class Explosion():
+    def __init__(self, position):
+        # this is very important to note
+        # this class is technically not a pygame sprite
+        # however its similar enough to be in this file as it like the other sprites shows up on screen
+        # and has self contained functionality
+        # in general this class behaves quite like a template for data
+
+        # initial variables
+        self.position = position
+        self.radius_size = 0
+
+        # controlling size of the explosion
+        self.max_size = 50
+        self.increase_amount = 1

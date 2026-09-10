@@ -146,7 +146,6 @@ def rendering(screen):
         screen.blit(reloading_text_surface, pygame.Vector2(50, 100))
 
 
-
 def run(screen, dt, key, key_just):
 
     global pause
