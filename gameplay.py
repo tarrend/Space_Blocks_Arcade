@@ -78,6 +78,8 @@ def collisions():
 
     global score
 
+    player = player_group.sprite
+
     # collision between laser and meteors
     laser_meteor_collision = pygame.sprite.groupcollide(laser_group, meteor_group, True, True)
     if laser_meteor_collision:
@@ -88,6 +90,15 @@ def collisions():
 
             # there will be extra stuff here later on such as an explosion effect
             # for now this is all that the code here does
+
+    # collision between player and meteors
+    player_meteor_collision = pygame.sprite.spritecollideany(player, meteor_group)
+    if player_meteor_collision:
+        # collision occured
+
+        # reset the meteors and score
+        meteor_group.empty()
+        score = 0
 
 def updating(dt, key, key_just):
 
