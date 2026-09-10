@@ -84,14 +84,15 @@ def collisions():
     # collision between laser and meteors
     laser_meteor_collision = pygame.sprite.groupcollide(laser_group, meteor_group, True, True)
     if laser_meteor_collision:
-        for meteor in laser_meteor_collision.values():
+        for meteors in laser_meteor_collision.values():
+            for meteor in meteors:
 
-            # increase the score
-            score += 1
+                # increase the score
+                score += 1
 
-            # there will be extra stuff here later on such as an explosion effect
-            # for now this is all that the code here does
-            explosion_group.append(sprites.Explosion(meteor.position))
+                # there will be extra stuff here later on such as an explosion effect
+                # for now this is all that the code here does
+                explosion_group.append(sprites.Explosion(meteor.position))
 
     # collision between player and meteors
     player_meteor_collision = pygame.sprite.spritecollideany(player, meteor_group)
@@ -120,7 +121,7 @@ def updating(dt, key, key_just):
     # handling collisions
     collisions()
 
-def rendering(screen):
+def rendering(screen, dt):
     # rendering the different groups
     player.display_extras(screen)
     player_group.draw(screen)
@@ -147,6 +148,11 @@ def rendering(screen):
         reloading_text_surface = size_35_font.render(reloading_text_text, True, "#c90e1e")
         screen.blit(reloading_text_surface, pygame.Vector2(50, 100))
 
+    # explosions
+    for explosion in explosion_group:
+        explosion.update_draw(screen, dt)
+
+
 
 def run(screen, dt, key, key_just):
 
@@ -156,7 +162,7 @@ def run(screen, dt, key, key_just):
         # only continue updating the game if its not paused
         updating(dt, key, key_just)
 
-    rendering(screen)
+    rendering(screen, dt)
 
     # check if the player decides to pause the game
     if key_just[pygame.K_SPACE]:
