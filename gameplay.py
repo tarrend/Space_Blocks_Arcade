@@ -73,6 +73,33 @@ def shoot(key_just, position):
         laser_group.add(sprites.Laser(position))
         can_shoot = False
 
+def collisions():
+    # this function is required for checking the different collisions that can occur and handle them
+
+    global score
+
+    player = player_group.sprite
+
+    # collision between laser and meteors
+    laser_meteor_collision = pygame.sprite.groupcollide(laser_group, meteor_group, True, True)
+    if laser_meteor_collision:
+        for meteor in laser_meteor_collision.values():
+
+            # increase the score
+            score += 1
+
+            # there will be extra stuff here later on such as an explosion effect
+            # for now this is all that the code here does
+
+    # collision between player and meteors
+    player_meteor_collision = pygame.sprite.spritecollideany(player, meteor_group)
+    if player_meteor_collision:
+        # collision occured
+
+        # reset the meteors and score
+        meteor_group.empty()
+        score = 0
+
 def updating(dt, key, key_just):
 
     # updating the different groups
@@ -87,6 +114,9 @@ def updating(dt, key, key_just):
     laser_spawn_pos = player.position.copy()
     laser_spawn_pos.y -= 40
     shoot(key_just, laser_spawn_pos)
+
+    # handling collisions
+    collisions()
 
 def rendering(screen):
     # rendering the different groups
