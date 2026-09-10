@@ -103,7 +103,11 @@ def collisions():
         meteor_group.empty()
         score = 0
 
-def updating(dt, key, key_just):
+def updating(screen, dt, key, key_just):
+
+    # the reason why screen is passed here is because the explosions require it
+    # they are not traditional sprites and require pygame.draw.circle in them
+    # the reason they aren't in rendering is because ideally the explosion should continue while paused
 
     # updating the different groups
     player_group.update(dt, key)
@@ -121,7 +125,13 @@ def updating(dt, key, key_just):
     # handling collisions
     collisions()
 
-def rendering(screen, dt):
+    
+    # explosions
+    for explosion in explosion_group:
+        explosion.update_draw(screen, dt)
+
+def rendering(screen):
+
     # rendering the different groups
     player.display_extras(screen)
     player_group.draw(screen)
@@ -148,10 +158,6 @@ def rendering(screen, dt):
         reloading_text_surface = size_35_font.render(reloading_text_text, True, "#c90e1e")
         screen.blit(reloading_text_surface, pygame.Vector2(50, 100))
 
-    # explosions
-    for explosion in explosion_group:
-        explosion.update_draw(screen, dt)
-
 
 
 def run(screen, dt, key, key_just):
@@ -160,9 +166,9 @@ def run(screen, dt, key, key_just):
 
     if not pause:
         # only continue updating the game if its not paused
-        updating(dt, key, key_just)
+        updating(screen, dt, key, key_just)
 
-    rendering(screen, dt)
+    rendering(screen)
 
     # check if the player decides to pause the game
     if key_just[pygame.K_SPACE]:
