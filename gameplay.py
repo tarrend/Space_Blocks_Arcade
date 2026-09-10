@@ -12,6 +12,7 @@ import sprites
 player_group = pygame.sprite.GroupSingle()
 laser_group = pygame.sprite.Group()
 meteor_group = pygame.sprite.Group()
+explosion_group = []
 
 # add player to their group
 player_group.add(sprites.Ship())
@@ -90,6 +91,7 @@ def collisions():
 
             # there will be extra stuff here later on such as an explosion effect
             # for now this is all that the code here does
+            explosion_group.append(sprites.Explosion(meteor.position))
 
     # collision between player and meteors
     player_meteor_collision = pygame.sprite.spritecollideany(player, meteor_group)

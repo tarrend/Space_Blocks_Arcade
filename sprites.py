@@ -159,7 +159,6 @@ class Explosion():
         # this class is technically not a pygame sprite
         # however its similar enough to be in this file as it like the other sprites shows up on screen
         # and has self contained functionality
-        # in general this class behaves quite like a template for data
 
         # initial variables
         self.position = position
@@ -167,4 +166,20 @@ class Explosion():
 
         # controlling size of the explosion
         self.max_size = 50
-        self.increase_amount = 1
+        self.increment_amount = 1
+        self.increasing = True
+
+
+        self.colour = "#f56f0f"
+
+    def update_draw(self, screen):
+
+        if self.increasing:
+            self.radius_size += self.increment_amount
+
+            # check ifu the explosion should start decreasing
+            if self.radius_size > 50:
+                self.increasing = False
+        else:
+            self.radius_size -= self.increment_amount
+
