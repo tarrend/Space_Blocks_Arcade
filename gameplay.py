@@ -127,8 +127,10 @@ def updating(screen, dt, key, key_just):
 
     
     # explosions
-    for explosion in explosion_group:
+    for i, explosion in enumerate(explosion_group):
         explosion.update_draw(screen, dt)
+        if explosion.destroy:
+            explosion_group.pop(i)
 
 def rendering(screen):
 

@@ -172,6 +172,8 @@ class Explosion():
 
         self.colour = "#f56f0f"
 
+        self.destroy = False
+
     def update_draw(self, screen, dt):
 
         if self.increasing:
@@ -185,3 +187,5 @@ class Explosion():
 
         if self.radius_size >= 1:
             pygame.draw.circle(screen, self.colour, self.position, self.radius_size)
+        else:
+            self.destroy = True
