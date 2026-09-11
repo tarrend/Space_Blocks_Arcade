@@ -15,14 +15,14 @@ Notes on this project:
 
 This project is not a community project, its intended to be an independant project I work on, this means that pull requests will be disabled. You are still free to use the project under the conditions of the MIT License.
 
-As of currently this project is still in development, when it is done I will provide an update in this file stating it is. As of right now the features that can be expected to be added are:
+Currently this project is still in development, when it is done I will provide an update in this file stating it is. As of right now the features that can be expected to be added are:
 
 - Golden meteors, they are a variant of regular meteors that provide 10 score
 - Aliens, these are enemies that fly across the screen in ufos and fire a single laser at the player, regular aliens give 5 score and golden ones give 50
 
 (Please note that these features are only expected to be added, they may not actually make it into the completed release. More expected features may be added later on.)
 
-When this project is fully released there may still be ocassional small updates added.
+When this project is fully finished there may still be ocassional small updates added.
 
 You are probably wondering why the name of this project is Space Blocks Arcade, well Space Blocks is a play on the words spaceships but the ships is replaced with Blocks, this is cause the game is largely made of basic Blocks. Arcade cause I thought the game was quite arcade style.
 
