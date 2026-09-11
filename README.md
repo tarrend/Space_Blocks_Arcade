@@ -15,7 +15,7 @@ Notes on this project:
 
 This project is not a community project, its intended to be an independant project I work on, this means that pull requests will be disabled. You are still free to use the project under the conditions of the MIT License.
 
-Currently this project is still in development, when it is done I will provide an update in this file stating it is. As of right now the features that can be expected to be added are:
+Currently this project is still in development, when it is done I will provide an update in this readme/description stating it is. As of right now the features that can be expected to be added are:
 
 - Golden meteors, they are a variant of regular meteors that provide 10 score
 - Aliens, these are enemies that fly across the screen in ufos and fire a single laser at the player, regular aliens give 5 score and golden ones give 50
