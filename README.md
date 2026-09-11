@@ -13,7 +13,7 @@ Controls:
 
 Notes on this project:
 
-This project is not a community project, its intended to be an independant project I work on, this means that pull requests will be disabled. You are still free to use the project under the conditions of the MIT License.
+This project is not a community project, its intended to be an independant project I work on, this means that pull requests will be restricted. You are still free to use the project under the conditions of the MIT License.
 
 Currently this project is still in development, when it is done I will provide an update in this readme/description stating it is. As of right now the features that can be expected to be added are:
 
