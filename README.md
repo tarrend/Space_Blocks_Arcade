@@ -6,10 +6,10 @@ In this game you control a spaceship that can move around the screen, as this sp
 (The gameplay entry will be updated when new gameplay mechanics are added or changed)
 
 Controls:
-Movement : Arrow Keys (LEFT, RIGHT, UP, DOWN)
-Shoot : Z
-Pause : Spacebar
-Quit : Q or 'X' button to close window
+- Movement : Arrow Keys (LEFT, RIGHT, UP, DOWN)
+- Shoot : Z
+- Pause : Spacebar
+- Quit : Q or 'X' button to close window
 
 Notes on this project:
 
