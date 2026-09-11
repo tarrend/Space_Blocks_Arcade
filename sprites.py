@@ -166,26 +166,34 @@ class Explosion():
 
         # controlling size of the explosion
         self.max_size = 50
-        self.increment_amount = 400
+        self.increment_amount = 5
         self.increasing = True
+
+        # also note that the increment amount may not be accurate to pixels
+        # its just a general measurement for increase and decrease
+
+        self.adjusted_increment = self.increment_amount * 100
 
 
         self.colour = "#f56f0f"
 
         self.destroy = False
 
-    def update_draw(self, screen, dt):
+    def update(self, dt):
 
         if self.increasing:
-            self.radius_size += self.increment_amount * dt
+            
+            self.radius_size += self.adjusted_increment * dt
 
             # check ifu the explosion should start decreasing
-            if self.radius_size > 50:
+            if self.radius_size > self.max_size:
                 self.increasing = False
         else:
-            self.radius_size -= self.increment_amount * dt
+            self.radius_size -= self.adjusted_increment * dt
 
-        if self.radius_size >= 1:
-            pygame.draw.circle(screen, self.colour, self.position, self.radius_size)
-        else:
+        if not self.radius_size >= 1:
             self.destroy = True
+
+    def draw(self, screen):
+
+        pygame.draw.circle(screen, self.colour, self.position, self.radius_size)

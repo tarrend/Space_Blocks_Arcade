@@ -103,6 +103,10 @@ def collisions():
         meteor_group.empty()
         score = 0
 
+        # add an explosion
+        explosion_group.clear()
+        explosion_group.append(sprites.Explosion(player.position))
+
 def updating(dt, key, key_just):
 
     # the reason why screen is passed here is because the explosions require it
@@ -124,6 +128,14 @@ def updating(dt, key, key_just):
 
     # handling collisions
     collisions()
+
+    # handling explosions
+    for i, explosion in enumerate(explosion_group):
+
+        if explosion.destroy:
+            explosion_group.pop(i)
+            continue
+        explosion.update(dt)
 
 def rendering(screen):
 
@@ -152,6 +164,10 @@ def rendering(screen):
         reloading_text_text = f"Reloading... ({reloading_time:.1f})"
         reloading_text_surface = size_35_font.render(reloading_text_text, True, "#c90e1e")
         screen.blit(reloading_text_surface, pygame.Vector2(50, 100))
+
+    # handling explosion
+    for explosion in explosion_group:
+        explosion.draw(screen)
 
 
 
