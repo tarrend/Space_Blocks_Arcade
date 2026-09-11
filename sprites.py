@@ -1,5 +1,7 @@
 import pygame
+from random import randint, uniform
 from constants import *
+
 
 # this file contains the different sprites for the game
 class Ship(pygame.sprite.Sprite):
@@ -86,13 +88,48 @@ class Ship(pygame.sprite.Sprite):
     def update(self, dt, key):
         self.movement(dt, key)
 
+class Meteor(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+
+        # initial variables
+
+        random_size = randint(40, 60)
+
+        self.image = pygame.Surface((random_size, random_size))
+        self.image.fill("azure3")
+        self.rect = self.image.get_rect()
+
+        # movement
+        self.position = pygame.Vector2(randint(0, WIDTH), randint(-120, -80))
+        self.speed = randint(250, 300)
+        self.direction = pygame.Vector2(uniform(-0.2, 0.2), 1).normalize()
+
+        self.rect.center = self.position
+
+    def movement(self, dt):
+
+        # move the meteor
+        velocity = self.direction * self.speed
+        self.position += velocity * dt
+
+        # move the rect to the position
+        self.rect.center = self.position
+
+        # despawn the meteor
+        if self.position.y > HEIGHT + 65:
+            self.kill()
+
+    def update(self, dt):
+        self.movement(dt)
+
 class Laser(pygame.sprite.Sprite):
     def __init__(self, position):
         super().__init__()
 
         # initial variables
 
-        self.image = pygame.Surface((4, 24))
+        self.image = pygame.Surface((10, 50))
         self.image.fill("#ffdd30")
         self.rect = self.image.get_rect()
 
@@ -110,8 +147,53 @@ class Laser(pygame.sprite.Sprite):
         self.rect.center = self.position
 
         # check if the laser is off screen, if it is destroy the laser
-        if self.position.y < -20:
+        if self.position.y < -50:
             self.kill()
 
     def update(self, dt):
         self.movement(dt)
+
+class Explosion():
+    def __init__(self, position):
+        # this is very important to note
+        # this class is technically not a pygame sprite
+        # however its similar enough to be in this file as it like the other sprites shows up on screen
+        # and has self contained functionality
+
+        # initial variables
+        self.position = position
+        self.radius_size = 0
+
+        # controlling size of the explosion
+        self.max_size = 50
+        self.increment_amount = 5
+        self.increasing = True
+
+        # also note that the increment amount may not be accurate to pixels
+        # its just a general measurement for increase and decrease
+
+        self.adjusted_increment = self.increment_amount * 100
+
+
+        self.colour = "#f56f0f"
+
+        self.destroy = False
+
+    def update(self, dt):
+
+        if self.increasing:
+            
+            self.radius_size += self.adjusted_increment * dt
+
+            # check ifu the explosion should start decreasing
+            if self.radius_size > self.max_size:
+                self.increasing = False
+        else:
+            self.radius_size -= self.adjusted_increment * dt
+
+        if not self.radius_size >= 1:
+            self.destroy = True
+
+    def draw(self, screen):
+
+        pygame.draw.circle(screen, self.colour, self.position, self.radius_size)

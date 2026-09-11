@@ -28,7 +28,7 @@ while running:
                 running = False
 
     # game updating and rendering
-    screen.fill("#0d002b")
+    screen.fill("#2d007a")
 
     # get inputs
     key = pygame.key.get_pressed()
