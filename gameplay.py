@@ -103,7 +103,7 @@ def collisions():
         meteor_group.empty()
         score = 0
 
-def updating(screen, dt, key, key_just):
+def updating(dt, key, key_just):
 
     # the reason why screen is passed here is because the explosions require it
     # they are not traditional sprites and require pygame.draw.circle in them
@@ -124,13 +124,6 @@ def updating(screen, dt, key, key_just):
 
     # handling collisions
     collisions()
-
-    
-    # explosions
-    for i, explosion in enumerate(explosion_group):
-        explosion.update_draw(screen, dt)
-        if explosion.destroy:
-            explosion_group.pop(i)
 
 def rendering(screen):
 
@@ -168,7 +161,7 @@ def run(screen, dt, key, key_just):
 
     if not pause:
         # only continue updating the game if its not paused
-        updating(screen, dt, key, key_just)
+        updating(dt, key, key_just)
 
     rendering(screen)
 
