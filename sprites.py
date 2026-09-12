@@ -169,14 +169,14 @@ class Alien(pygame.sprite.Sprite):
 
         # initial variables
         
-        self.image = pygame.Surface((100, 50))
+        self.image = pygame.Surface((130, 50))
         self.image.fill("#5195b0")
 
         self.rect = self.image.get_rect()
 
         # movement
         self.speed = randint(100, 250)
-        self.position = pygame.Vector2(randint(-120, -60), randint(60, 120))
+        self.position = pygame.Vector2(randint(-120, -90), randint(60, 120))
 
         self.rect.center = self.position
         
@@ -188,6 +188,7 @@ class Alien(pygame.sprite.Sprite):
         if self.position.x > WIDTH + 60:
             self.kill()
 
+        self.rect.center = self.position
 
     def update(self, dt):
         self.movement(dt)
