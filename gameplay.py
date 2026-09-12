@@ -155,6 +155,9 @@ def rendering(screen):
     meteor_group.draw(screen)
     alien_group.draw(screen)
 
+    for alien in alien_group.sprites():
+        alien.display_extras(screen)
+
 
 
     # displaying different text
