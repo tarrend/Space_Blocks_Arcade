@@ -177,7 +177,7 @@ class Alien(pygame.sprite.Sprite):
 
         # movement
         self.speed = randint(100, 250)
-        self.position = pygame.Vector2(randint(-120, -90), randint(60, 120))
+        self.position = pygame.Vector2(randint(30, 60), randint(60, 120))
 
         self.rect.center = self.position
 
