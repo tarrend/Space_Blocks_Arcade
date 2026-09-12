@@ -88,7 +88,10 @@ def collisions():
             for meteor in meteors:
 
                 # increase the score
-                score += 1
+                if meteor.is_golden:
+                    score += 10
+                else:
+                    score += 1
 
                 # there will be extra stuff here later on such as an explosion effect
                 # for now this is all that the code here does

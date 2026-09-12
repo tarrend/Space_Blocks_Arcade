@@ -96,8 +96,18 @@ class Meteor(pygame.sprite.Sprite):
 
         random_size = randint(40, 60)
 
+        self.is_golden = False
+
         self.image = pygame.Surface((random_size, random_size))
-        self.image.fill("azure3")
+
+        # determine if the meteor will be golden
+        if randint(1, 25) == 25:
+            self.image.fill("darkgoldenrod2")
+            self.is_golden = True
+        else:
+            self.image.fill("azure3")
+            self.is_golden = False
+
         self.rect = self.image.get_rect()
 
         # movement
