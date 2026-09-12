@@ -21,6 +21,7 @@ Currently this project is still in development, when it is done I will provide a
 
 - Golden meteors, they are a variant of regular meteors that provide 10 score
 - Aliens, these are enemies that fly across the screen in ufos and fire a single laser at the player, regular aliens give 5 score and golden ones give 50
+- Stars that appear in the background as visuals
 
 (Please note that these features are only expected to be added, they may not actually make it into the completed release. More expected features may be added later on.)
 
