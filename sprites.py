@@ -168,12 +168,29 @@ class Alien(pygame.sprite.Sprite):
         super().__init__()
 
         # initial variables
-        self.position = pygame.Vector2(randint(-150, -100), randint(60, 120))
-
-        self.image = pygame.Surface((70, 20))
+        
+        self.image = pygame.Surface((100, 50))
         self.image.fill("#5195b0")
 
-        self.rect = self.image.get_rect(center=self.position)
+        self.rect = self.image.get_rect()
+
+        # movement
+        self.speed = randint(100, 250)
+        self.position = pygame.Vector2(randint(-120, -60), randint(60, 120))
+
+        self.rect.center = self.position
+        
+
+    def movement(self, dt):
+
+        self.position.x += self.speed * dt
+
+        if self.position.x > WIDTH + 60:
+            self.kill()
+
+
+    def update(self, dt):
+        self.movement(dt)
 
 class Explosion():
     def __init__(self, position):
