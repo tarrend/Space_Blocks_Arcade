@@ -163,6 +163,18 @@ class Laser(pygame.sprite.Sprite):
     def update(self, dt):
         self.movement(dt)
 
+class Alien(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+
+        # initial variables
+        self.position = pygame.Vector2(randint(-150, -100), randint(60, 120))
+
+        self.image = pygame.Surface((70, 20))
+        self.image.fill("#5195b0")
+
+        self.rect = self.image.get_rect(center=self.position)
+
 class Explosion():
     def __init__(self, position):
         # this is very important to note
