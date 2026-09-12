@@ -19,7 +19,6 @@ I will be checking and reviewing issues on this project for potential bugs and w
 
 Currently this project is still in development, when it is done I will provide an update in this readme/description stating it is. As of right now the features that can be expected to be added are:
 
-- Golden meteors, they are a variant of regular meteors that provide 10 score
 - Aliens, these are enemies that fly across the screen in ufos and fire a single laser at the player, regular aliens give 5 score and golden ones give 50
 - Stars that appear in the background as visuals
 
