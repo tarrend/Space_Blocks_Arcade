@@ -15,9 +15,6 @@ meteor_group = pygame.sprite.Group()
 alien_group = pygame.sprite.GroupSingle()
 explosion_group = []
 
-# for now add an alien to alien group
-alien_group.add(sprites.Alien())
-
 # add player to their group
 player_group.add(sprites.Ship())
 player = player_group.sprite
@@ -36,6 +33,9 @@ can_shoot = True
 
 meteor_timer = 0
 meteor_time = 0.2
+
+alien_timer = 0
+alien_time = 25
 
 # score
 score = 0
@@ -69,6 +69,16 @@ def timers(dt):
 
         # add the meteor
         meteor_group.add(sprites.Meteor())
+
+    # aliens
+
+    global alien_timer
+
+    if alien_timer < alien_time:
+        alien_timer += dt
+    else:
+        alien_timer -= alien_time
+        alien_group.add(sprites.Alien())
 
 def shoot(key_just, position):
 
