@@ -124,6 +124,11 @@ def collisions():
     player_alien_collision = pygame.sprite.spritecollideany(player, alien_group)
     if player_alien_collision:
         player_collision_lose(player)
+
+    # collision between player and alien lasers
+    player_alien_laser_collision = pygame.sprite.spritecollideany(player, alien_laser_group)
+    if player_alien_laser_collision:
+        player_collision_lose(player)
         
 
 def player_collision_lose(player):
@@ -131,9 +136,10 @@ def player_collision_lose(player):
     global score
     # collision occured
 
-    # reset the meteors, ufo and score
+    # reset the meteors, aliens, alien lasers and score
     meteor_group.empty()
     alien_group.empty()
+    alien_laser_group.empty()
     score = 0
             
     # add an explosion

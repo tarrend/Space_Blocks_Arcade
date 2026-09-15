@@ -270,6 +270,9 @@ class AlienLaser(pygame.sprite.Sprite):
 
         self.rect.center = self.position
 
+        if self.position.y > HEIGHT + 60:
+            self.kill()
+
     def movement(self, dt):
         self.position += self.velocity * dt
         self.rect.center = self.position
