@@ -13,6 +13,7 @@ player_group = pygame.sprite.GroupSingle()
 laser_group = pygame.sprite.Group()
 meteor_group = pygame.sprite.Group()
 alien_group = pygame.sprite.GroupSingle()
+alien_laser_group = pygame.sprite.GroupSingle()
 explosion_group = []
 
 # add player to their group
@@ -156,6 +157,7 @@ def updating(dt, key, key_just):
     laser_group.update(dt)
     meteor_group.update(dt)
     alien_group.update(dt)
+    alien_laser_group.update(dt)
 
     # run the different game timers
     timers(dt)
@@ -185,6 +187,7 @@ def rendering(screen):
     laser_group.draw(screen)
     meteor_group.draw(screen)
     alien_group.draw(screen)
+    alien_laser_group.draw(screen)
 
     for alien in alien_group.sprites():
         alien.display_extras(screen)

@@ -264,6 +264,12 @@ class AlienLaser(pygame.sprite.Sprite):
 
         self.velocity = self.speed * self.direction
 
+    def movement(self, dt):
+        self.position += self.velocity * dt
+        self.rect.center = self.position
+
+    def update(self, dt):
+        self.movement(dt)
 
 class Explosion():
     def __init__(self, position):
