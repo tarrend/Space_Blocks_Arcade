@@ -197,7 +197,7 @@ class Alien(pygame.sprite.Sprite):
 
         # chance the alien is golden
         self.is_golden = False
-        if randint(24, 25) == 25:
+        if randint(1, 25) == 25:
             self.is_golden = True
             self.glass_colour = "#d5dc01"
             self.bottom_piece_colour = "#e9bf02"
@@ -209,8 +209,9 @@ class Alien(pygame.sprite.Sprite):
 
         self.set_extras_locations()
 
-        # fire location
+        # firing
         self.fire_point = randint(150, WIDTH-150)
+        self.fired = False
 
     def set_extras_locations(self):
         self.glass_rect.midbottom = pygame.Vector2(self.position.x, self.position.y-25)
@@ -262,10 +263,12 @@ class AlienLaser(pygame.sprite.Sprite):
         self.position = position.copy()
         self.speed = 250
 
-        self.direction = player_position - position
+        self.direction = player_position.copy() - position
         self.direction = self.direction.normalize()
 
         self.velocity = self.speed * self.direction
+
+        self.rect.center = self.position
 
     def movement(self, dt):
         self.position += self.velocity * dt

@@ -36,7 +36,7 @@ meteor_timer = 0
 meteor_time = 0.2
 
 alien_timer = 0
-alien_time = 5
+alien_time = 25
 
 # score
 score = 0
@@ -95,8 +95,9 @@ def shoot(key_just, position):
     alien = alien_group.sprite
     player = player_group.sprite
     if alien:
-        if alien.position.x > alien.fire_point:
+        if alien.position.x > alien.fire_point and not alien.fired:
             alien_laser_group.add(sprites.AlienLaser(alien.position, player.position))
+            alien.fired = True
 
 def collisions():
     # this function is required for checking the different collisions that can occur and handle them
