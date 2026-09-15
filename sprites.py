@@ -16,19 +16,16 @@ class Ship(pygame.sprite.Sprite):
 
         self.rect = self.image.get_rect(center=pygame.Vector2(WIDTH/2, HEIGHT-200))
 
-        # wings and laser gun
-        self.wing_rect = pygame.Rect((0, 0), (70, 15))
-        self.wing_rect_2 = self.wing_rect.copy()
-
-        self.wing_rect.center = pygame.Vector2(WIDTH/2-self.image_width_half, HEIGHT-200)
-        self.wing_rect_2.center = pygame.Vector2(WIDTH/2+self.image_width_half, HEIGHT-200)
-
-        self.laser_gun_rect = pygame.Rect((0, 0), (16, 12))
-        self.laser_gun_rect.center = pygame.Vector2(WIDTH/2, HEIGHT-206-self.image_width_half)
-
         # related to movement
         self.position = pygame.Vector2(WIDTH/2, HEIGHT-200)
         self.speed = 250
+
+        # different parts of the ship
+        self.wing_rect = pygame.Rect((0, 0), (70, 15))
+        self.wing_rect_2 = self.wing_rect.copy()
+        self.laser_gun_rect = pygame.Rect((0, 0), (16, 12))
+
+        self.set_extra_locations()
 
     def movement(self, dt, key):
 
@@ -68,13 +65,17 @@ class Ship(pygame.sprite.Sprite):
             self.position.y = HEIGHT - self.image_width_half
 
         # change the position of the parts of the sprite
-        self.wing_rect.center = pygame.Vector2(self.position.x-self.image_width_half, self.position.y)
-        self.wing_rect_2.center = pygame.Vector2(self.position.x+self.image_width_half, self.position.y)
+        self.set_extra_locations()
 
-        self.laser_gun_rect.center = pygame.Vector2(self.position.x, self.position.y-self.image_width_half-6)
-        
         # set the rects center to the position
         self.rect.center = self.position
+
+    def set_extra_locations(self):
+        self.wing_rect.center = pygame.Vector2(self.position.x-self.image_width_half, self.position.y)
+        self.wing_rect_2.center = pygame.Vector2(self.position.x+self.image_width_half, self.position.y)
+        
+        self.laser_gun_rect.center = pygame.Vector2(self.position.x, self.position.y-self.image_width_half-6)
+                
 
     def display_extras(self, screen):
 
@@ -159,6 +160,88 @@ class Laser(pygame.sprite.Sprite):
         # check if the laser is off screen, if it is destroy the laser
         if self.position.y < -50:
             self.kill()
+
+    def update(self, dt):
+        self.movement(dt)
+
+class Alien(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+
+        # initial variables
+        
+        self.image = pygame.Surface((150, 50))
+
+        self.rect = self.image.get_rect()
+
+        # movement
+        self.speed = randint(100, 250)
+        self.position = pygame.Vector2(randint(-120, -90), randint(90, 120))
+
+        self.rect.center = self.position
+
+        # different parts
+        self.glass_rect = pygame.Rect(0, 0, 70, 50)
+        self.bottom_piece_rect = pygame.Rect(0, 0, 70, 25)
+        self.square_rect = pygame.Rect(0, 0, 20, 20)
+
+        self.alien_rect = pygame.Rect(0, 0, 35, 35)
+        self.alien_eye_rect = pygame.Rect(0, 0, 7, 7)
+        self.alien_eye_rect_2 = self.alien_eye_rect.copy()
+
+        # colours
+        self.glass_colour = "#03cffc"
+        self.bottom_piece_colour = "#5195b0"
+        self.square_colour = "#2fd379"
+        self.alien_colour = "#51c083"
+
+        # chance the alien is golden
+        self.is_golden = False
+        if randint(24, 25) == 25:
+            self.is_golden = True
+            self.glass_colour = "#d5dc01"
+            self.bottom_piece_colour = "#e9bf02"
+            self.square_colour = "#c8b444"
+            self.alien_colour = "#cea32f"
+            self.image.fill(self.bottom_piece_colour)
+        else:
+            self.image.fill("#5195b0")
+
+        self.set_extras_locations()
+
+    def set_extras_locations(self):
+        self.glass_rect.midbottom = pygame.Vector2(self.position.x, self.position.y-25)
+        self.bottom_piece_rect.midtop = pygame.Vector2(self.position.x, self.position.y+25)
+        self.square_rect.center = pygame.Vector2(self.position.x, self.position.y)
+        self.alien_rect.midbottom = pygame.Vector2(self.position.x, self.position.y-25)
+        self.alien_eye_rect.center = pygame.Vector2(self.position.x-7, self.position.y-50)
+        self.alien_eye_rect_2.center = pygame.Vector2(self.position.x+7, self.position.y-50)
+
+    def movement(self, dt):
+
+        self.position.x += self.speed * dt
+
+        if self.position.x > WIDTH + 60:
+            self.kill()
+
+        self.rect.center = self.position
+
+        # make the extra parts stay along
+        self.set_extras_locations()
+
+        # despawn the alien when it is off screen
+        if self.position.x > WIDTH + 400:
+            self.kill()
+
+
+
+    def display_extras(self, screen):
+        pygame.draw.rect(screen, self.glass_colour, self.glass_rect)
+        pygame.draw.rect(screen, self.bottom_piece_colour, self.bottom_piece_rect)
+        pygame.draw.rect(screen, self.square_colour, self.square_rect)
+        pygame.draw.rect(screen, self.alien_colour, self.alien_rect)
+        pygame.draw.rect(screen, "black", self.alien_eye_rect)
+        pygame.draw.rect(screen, "black", self.alien_eye_rect_2)
 
     def update(self, dt):
         self.movement(dt)
