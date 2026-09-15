@@ -247,7 +247,7 @@ class Alien(pygame.sprite.Sprite):
         self.movement(dt)
 
 class AlienLaser(pygame.sprite.Sprite):
-    def __init__(self, position):
+    def __init__(self, position, player_position):
         super().__init__()
 
         # initial variables
@@ -258,6 +258,12 @@ class AlienLaser(pygame.sprite.Sprite):
         # movement
         self.position = position
         self.speed = 250
+
+        self.direction = player_position - position
+        self.direction = self.direction.normalize()
+
+        self.velocity = self.speed * self.direction
+
 
 class Explosion():
     def __init__(self, position):
