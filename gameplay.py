@@ -12,7 +12,7 @@ import sprites
 player_group = pygame.sprite.GroupSingle()
 laser_group = pygame.sprite.Group()
 meteor_group = pygame.sprite.Group()
-alien_group = pygame.sprite.Group()
+alien_group = pygame.sprite.GroupSingle()
 explosion_group = []
 
 # for now add an alien to alien group
@@ -106,13 +106,15 @@ def collisions():
     if player_meteor_collision:
         # collision occured
 
-        # reset the meteors and score
+        # reset the meteors, ufo and score
         meteor_group.empty()
+        alien_group.empty()
         score = 0
 
         # add an explosion
-        explosion_group.clear()
         explosion_group.append(sprites.Explosion(player.position))
+
+        
 
 def updating(dt, key, key_just):
 

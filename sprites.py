@@ -182,12 +182,23 @@ class Alien(pygame.sprite.Sprite):
         self.rect.center = self.position
 
         # different parts
-        self.glass_rect = pygame.Rect(0, 0, 60, 50)
+        self.glass_rect = pygame.Rect(0, 0, 70, 50)
+        self.bottom_piece_rect = pygame.Rect(0, 0, 70, 25)
+        self.square_rect = pygame.Rect(0, 0, 20, 20)
+
+        self.alien_rect = pygame.Rect(0, 0, 35, 35)
+        self.alien_eye_rect = pygame.Rect(0, 0, 7, 7)
+        self.alien_eye_rect_2 = self.alien_eye_rect.copy()
 
         self.set_extras_locations()
 
     def set_extras_locations(self):
-        self.glass_rect.center = pygame.Vector2(self.position.x, self.position.y-50)
+        self.glass_rect.midbottom = pygame.Vector2(self.position.x, self.position.y-25)
+        self.bottom_piece_rect.midtop = pygame.Vector2(self.position.x, self.position.y+25)
+        self.square_rect.center = pygame.Vector2(self.position.x, self.position.y)
+        self.alien_rect.midbottom = pygame.Vector2(self.position.x, self.position.y-25)
+        self.alien_eye_rect.center = pygame.Vector2(self.position.x-7, self.position.y-50)
+        self.alien_eye_rect_2.center = pygame.Vector2(self.position.x+7, self.position.y-50)
 
     def movement(self, dt):
 
@@ -204,6 +215,11 @@ class Alien(pygame.sprite.Sprite):
 
     def display_extras(self, screen):
         pygame.draw.rect(screen, "#03cffc", self.glass_rect)
+        pygame.draw.rect(screen, "#5195b0", self.bottom_piece_rect)
+        pygame.draw.rect(screen, "#2fd379", self.square_rect)
+        pygame.draw.rect(screen, "#51c083", self.alien_rect)
+        pygame.draw.rect(screen, "black", self.alien_eye_rect)
+        pygame.draw.rect(screen, "black", self.alien_eye_rect_2)
 
     def update(self, dt):
         self.movement(dt)
