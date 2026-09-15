@@ -91,54 +91,59 @@ def shoot(key_just, position):
 def collisions():
     # this function is required for checking the different collisions that can occur and handle them
 
-    global score
-
     player = player_group.sprite
 
     # collision between laser and meteors
     laser_meteor_collision = pygame.sprite.groupcollide(laser_group, meteor_group, True, True)
     if laser_meteor_collision:
-        for meteors in laser_meteor_collision.values():
-            for meteor in meteors:
-
-                # increase the score
-                if meteor.is_golden:
-                    score += 10
-                else:
-                    score += 1
-
-                explosion_group.append(sprites.Explosion(meteor.position))
+        player_collision_gain(laser_meteor_collision, 1, 10)
 
     # collision between laser and aliens
     laser_alien_collision = pygame.sprite.groupcollide(laser_group, alien_group, True, True)
     if laser_alien_collision:
-        for aliens in laser_alien_collision.values():
-            for alien in aliens:
-
-                # increase score
-                if alien.is_golden:
-                    score += 50
-                else:
-                    score += 5
-
-                explosion_group.append(sprites.Explosion(alien.position))
-
+        player_collision_gain(laser_alien_collision, 5, 50)
                     
 
     # collision between player and meteors
     player_meteor_collision = pygame.sprite.spritecollideany(player, meteor_group)
     if player_meteor_collision:
-        # collision occured
+        player_collision_lose(player)
 
-        # reset the meteors, ufo and score
-        meteor_group.empty()
-        alien_group.empty()
-        score = 0
-
-        # add an explosion
-        explosion_group.append(sprites.Explosion(player.position))
-
+    # collision between player and aliens
+    player_alien_collision = pygame.sprite.spritecollideany(player, alien_group)
+    if player_alien_collision:
+        player_collision_lose(player)
         
+
+def player_collision_lose(player):
+
+    global score
+    # collision occured
+
+    # reset the meteors, ufo and score
+    meteor_group.empty()
+    alien_group.empty()
+    score = 0
+            
+    # add an explosion
+    explosion_group.append(sprites.Explosion(player.position))
+
+def player_collision_gain(collisions, default_amount, gold_amount):
+
+    global score
+
+    for objects in collisions.values():
+        for object in objects:
+
+            # increase score
+            if object.is_golden:
+                score += gold_amount
+            else:
+                score += default_amount
+
+            explosion_group.append(sprites.Explosion(object.position))
+
+
 
 def updating(dt, key, key_just):
 
