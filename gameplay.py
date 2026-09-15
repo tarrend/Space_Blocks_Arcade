@@ -13,6 +13,7 @@ player_group = pygame.sprite.GroupSingle()
 laser_group = pygame.sprite.Group()
 meteor_group = pygame.sprite.Group()
 alien_group = pygame.sprite.GroupSingle()
+alien_laser_group = pygame.sprite.GroupSingle()
 explosion_group = []
 
 # add player to their group
@@ -35,7 +36,7 @@ meteor_timer = 0
 meteor_time = 0.2
 
 alien_timer = 0
-alien_time = 5
+alien_time = 25
 
 # score
 score = 0
@@ -81,12 +82,22 @@ def timers(dt):
         alien_group.add(sprites.Alien())
 
 def shoot(key_just, position):
+    # shoot at this stage does not just cover player shooting
+    # it also covers the aliens being able to shoot
 
     global can_shoot
 
     if key_just[pygame.K_z] and can_shoot:
         laser_group.add(sprites.Laser(position))
         can_shoot = False
+
+    # alien shooting
+    alien = alien_group.sprite
+    player = player_group.sprite
+    if alien:
+        if alien.position.x > alien.fire_point and not alien.fired:
+            alien_laser_group.add(sprites.AlienLaser(alien.position, player.position))
+            alien.fired = True
 
 def collisions():
     # this function is required for checking the different collisions that can occur and handle them
@@ -113,6 +124,11 @@ def collisions():
     player_alien_collision = pygame.sprite.spritecollideany(player, alien_group)
     if player_alien_collision:
         player_collision_lose(player)
+
+    # collision between player and alien lasers
+    player_alien_laser_collision = pygame.sprite.spritecollideany(player, alien_laser_group)
+    if player_alien_laser_collision:
+        player_collision_lose(player)
         
 
 def player_collision_lose(player):
@@ -120,9 +136,10 @@ def player_collision_lose(player):
     global score
     # collision occured
 
-    # reset the meteors, ufo and score
+    # reset the meteors, aliens, alien lasers and score
     meteor_group.empty()
     alien_group.empty()
+    alien_laser_group.empty()
     score = 0
             
     # add an explosion
@@ -156,6 +173,7 @@ def updating(dt, key, key_just):
     laser_group.update(dt)
     meteor_group.update(dt)
     alien_group.update(dt)
+    alien_laser_group.update(dt)
 
     # run the different game timers
     timers(dt)
@@ -189,7 +207,7 @@ def rendering(screen):
     for alien in alien_group.sprites():
         alien.display_extras(screen)
 
-
+    alien_laser_group.draw(screen)
 
     # displaying different text
     screen.blit(title_text_surface, title_text_rect)

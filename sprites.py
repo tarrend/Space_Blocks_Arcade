@@ -197,7 +197,7 @@ class Alien(pygame.sprite.Sprite):
 
         # chance the alien is golden
         self.is_golden = False
-        if randint(24, 25) == 25:
+        if randint(1, 25) == 25:
             self.is_golden = True
             self.glass_colour = "#d5dc01"
             self.bottom_piece_colour = "#e9bf02"
@@ -208,6 +208,10 @@ class Alien(pygame.sprite.Sprite):
             self.image.fill("#5195b0")
 
         self.set_extras_locations()
+
+        # firing
+        self.fire_point = randint(150, WIDTH-150)
+        self.fired = False
 
     def set_extras_locations(self):
         self.glass_rect.midbottom = pygame.Vector2(self.position.x, self.position.y-25)
@@ -242,6 +246,37 @@ class Alien(pygame.sprite.Sprite):
         pygame.draw.rect(screen, self.alien_colour, self.alien_rect)
         pygame.draw.rect(screen, "black", self.alien_eye_rect)
         pygame.draw.rect(screen, "black", self.alien_eye_rect_2)
+
+    def update(self, dt):
+        self.movement(dt)
+
+class AlienLaser(pygame.sprite.Sprite):
+    def __init__(self, position, player_position):
+        super().__init__()
+
+        # initial variables
+        self.image = pygame.Surface((50, 50))
+        self.image.fill("#db584f")
+        self.rect = self.image.get_rect()
+
+        # movement
+        self.position = position.copy()
+        self.speed = 250
+
+        self.direction = player_position.copy() - position
+        self.direction = self.direction.normalize()
+
+        self.velocity = self.speed * self.direction
+
+        self.rect.center = self.position
+
+
+    def movement(self, dt):
+        self.position += self.velocity * dt
+        self.rect.center = self.position
+
+        if self.position.y > HEIGHT + 60:
+            self.kill()
 
     def update(self, dt):
         self.movement(dt)
