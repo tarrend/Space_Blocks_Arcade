@@ -1,7 +1,7 @@
 # Space_Blocks_Arcade
 This project is an arcade style space shooter game where the player, meteors and the enemies are basic blocks.
 
-Gameplay:
+**Gameplay**:
 In this game you control a spaceship that can move around the screen, as this spaceship you can shoot lasers and hit meteors to collect score, if you however hit a meteor you lose all your score.
 Rarely a meteor may be a golden one, these are more valuable giving more score.
 Regular meteors result in 1 score while golden meteors result in 10 score.
@@ -13,13 +13,13 @@ Colliding with a laser that an alien fires also results in a loss of all score.
 
 (The gameplay entry will be updated when new gameplay mechanics are added or changed)
 
-Controls:
+**Controls**:
 - Movement : Arrow Keys (LEFT, RIGHT, UP, DOWN)
 - Shoot : Z
 - Pause : Spacebar
 - Quit : Q or 'X' button to close window
 
-Notes on this project:
+**Notes on this project**:
 
 This project is not a community project, its intended to be an independant project I work on, this means that pull requests will be restricted. You are still free to use the project under the conditions of the MIT License.
 
