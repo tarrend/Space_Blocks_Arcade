@@ -212,6 +212,11 @@ class Alien(pygame.sprite.Sprite):
         # make the extra parts stay along
         self.set_extras_locations()
 
+        # despawn the alien when it is off screen
+        if self.position.x > WIDTH + 400:
+            self.kill()
+
+
 
     def display_extras(self, screen):
         pygame.draw.rect(screen, "#03cffc", self.glass_rect)
