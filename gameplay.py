@@ -203,12 +203,11 @@ def rendering(screen):
     laser_group.draw(screen)
     meteor_group.draw(screen)
     alien_group.draw(screen)
-    alien_laser_group.draw(screen)
 
     for alien in alien_group.sprites():
         alien.display_extras(screen)
 
-
+    alien_laser_group.draw(screen)
 
     # displaying different text
     screen.blit(title_text_surface, title_text_rect)
