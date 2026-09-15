@@ -171,7 +171,6 @@ class Alien(pygame.sprite.Sprite):
         # initial variables
         
         self.image = pygame.Surface((150, 50))
-        self.image.fill("#5195b0")
 
         self.rect = self.image.get_rect()
 
@@ -198,13 +197,15 @@ class Alien(pygame.sprite.Sprite):
 
         # chance the alien is golden
         self.is_golden = False
-        if randint(1, 25) == 25:
+        if randint(24, 25) == 25:
             self.is_golden = True
             self.glass_colour = "#d5dc01"
             self.bottom_piece_colour = "#e9bf02"
             self.square_colour = "#c8b444"
             self.alien_colour = "#cea32f"
             self.image.fill(self.bottom_piece_colour)
+        else:
+            self.image.fill("#5195b0")
 
         self.set_extras_locations()
 
