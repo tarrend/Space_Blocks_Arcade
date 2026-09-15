@@ -35,7 +35,7 @@ meteor_timer = 0
 meteor_time = 0.2
 
 alien_timer = 0
-alien_time = 25
+alien_time = 5
 
 # score
 score = 0
@@ -107,9 +107,23 @@ def collisions():
                 else:
                     score += 1
 
-                # there will be extra stuff here later on such as an explosion effect
-                # for now this is all that the code here does
                 explosion_group.append(sprites.Explosion(meteor.position))
+
+    # collision between laser and aliens
+    laser_alien_collision = pygame.sprite.groupcollide(laser_group, alien_group, True, True)
+    if laser_alien_collision:
+        for aliens in laser_alien_collision.values():
+            for alien in aliens:
+
+                # increase score
+                if alien.is_golden:
+                    score += 50
+                else:
+                    score += 5
+
+                explosion_group.append(sprites.Explosion(alien.position))
+
+                    
 
     # collision between player and meteors
     player_meteor_collision = pygame.sprite.spritecollideany(player, meteor_group)

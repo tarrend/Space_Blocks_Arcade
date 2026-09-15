@@ -190,6 +190,11 @@ class Alien(pygame.sprite.Sprite):
         self.alien_eye_rect = pygame.Rect(0, 0, 7, 7)
         self.alien_eye_rect_2 = self.alien_eye_rect.copy()
 
+        # chance the alien is golden
+        self.is_golden = False
+        if randint(1, 25) == 25:
+            self.is_golden = True
+
         self.set_extras_locations()
 
     def set_extras_locations(self):
