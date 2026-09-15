@@ -190,10 +190,21 @@ class Alien(pygame.sprite.Sprite):
         self.alien_eye_rect = pygame.Rect(0, 0, 7, 7)
         self.alien_eye_rect_2 = self.alien_eye_rect.copy()
 
+        # colours
+        self.glass_colour = "#03cffc"
+        self.bottom_piece_colour = "#5195b0"
+        self.square_colour = "#2fd379"
+        self.alien_colour = "#51c083"
+
         # chance the alien is golden
         self.is_golden = False
         if randint(1, 25) == 25:
             self.is_golden = True
+            self.glass_colour = "#d5dc01"
+            self.bottom_piece_colour = "#e9bf02"
+            self.square_colour = "#c8b444"
+            self.alien_colour = "#cea32f"
+            self.image.fill(self.bottom_piece_colour)
 
         self.set_extras_locations()
 
@@ -224,10 +235,10 @@ class Alien(pygame.sprite.Sprite):
 
 
     def display_extras(self, screen):
-        pygame.draw.rect(screen, "#03cffc", self.glass_rect)
-        pygame.draw.rect(screen, "#5195b0", self.bottom_piece_rect)
-        pygame.draw.rect(screen, "#2fd379", self.square_rect)
-        pygame.draw.rect(screen, "#51c083", self.alien_rect)
+        pygame.draw.rect(screen, self.glass_colour, self.glass_rect)
+        pygame.draw.rect(screen, self.bottom_piece_colour, self.bottom_piece_rect)
+        pygame.draw.rect(screen, self.square_colour, self.square_rect)
+        pygame.draw.rect(screen, self.alien_colour, self.alien_rect)
         pygame.draw.rect(screen, "black", self.alien_eye_rect)
         pygame.draw.rect(screen, "black", self.alien_eye_rect_2)
 
