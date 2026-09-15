@@ -9,7 +9,7 @@ Regular meteors result in 1 score while golden meteors result in 10 score.
 Aliens will spawn every 25 seconds and fire a laser at the player at a certain point (unless they are destroyed before they are able to fire).
 Aliens too also have a chance to be golden, regular aliens give 5 score while golden aliens give 50.
 
-Colliding with a laser that an alien fires also results in a loss of all score.
+Colliding with a laser that an alien fires also results in a loss of all score like colliding with a meteor.
 
 (The gameplay entry will be updated when new gameplay mechanics are added or changed)
 
