@@ -246,6 +246,19 @@ class Alien(pygame.sprite.Sprite):
     def update(self, dt):
         self.movement(dt)
 
+class AlienLaser(pygame.sprite.Sprite):
+    def __init__(self, position):
+        super().__init__()
+
+        # initial variables
+        self.image = pygame.Surface((50, 50))
+        self.image.fill("#db584f")
+        self.rect = self.image.get_rect()
+
+        # movement
+        self.position = position
+        self.speed = 250
+
 class Explosion():
     def __init__(self, position):
         # this is very important to note
