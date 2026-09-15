@@ -209,6 +209,9 @@ class Alien(pygame.sprite.Sprite):
 
         self.set_extras_locations()
 
+        # fire location
+        self.fire_point = randint(150, WIDTH-150)
+
     def set_extras_locations(self):
         self.glass_rect.midbottom = pygame.Vector2(self.position.x, self.position.y-25)
         self.bottom_piece_rect.midtop = pygame.Vector2(self.position.x, self.position.y+25)
@@ -256,7 +259,7 @@ class AlienLaser(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
         # movement
-        self.position = position
+        self.position = position.copy()
         self.speed = 250
 
         self.direction = player_position - position

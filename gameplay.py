@@ -82,12 +82,21 @@ def timers(dt):
         alien_group.add(sprites.Alien())
 
 def shoot(key_just, position):
+    # shoot at this stage does not just cover player shooting
+    # it also covers the aliens being able to shoot
 
     global can_shoot
 
     if key_just[pygame.K_z] and can_shoot:
         laser_group.add(sprites.Laser(position))
         can_shoot = False
+
+    # alien shooting
+    alien = alien_group.sprite
+    player = player_group.sprite
+    if alien:
+        if alien.position.x > alien.fire_point:
+            alien_laser_group.add(sprites.AlienLaser(alien.position, player.position))
 
 def collisions():
     # this function is required for checking the different collisions that can occur and handle them
