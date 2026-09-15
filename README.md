@@ -3,7 +3,14 @@ This project is an arcade style space shooter game where the player, meteors and
 
 Gameplay:
 In this game you control a spaceship that can move around the screen, as this spaceship you can shoot lasers and hit meteors to collect score, if you however hit a meteor you lose all your score.
+Rarely a meteor may be a golden one, these are more valuable giving more score.
+Regular meteors result in 1 score while golden meteors result in 10 score.
+
+Aliens will spawn every 25 seconds and fire a laser at the player at a certain point (unless they are destroyed before they are able to fire).
+Aliens too also have a chance to be golden, regular aliens give 5 score while golden aliens give 50.
 (The gameplay entry will be updated when new gameplay mechanics are added or changed)
+
+Colliding with a laser that an alien fires also results in a loss of all score.
 
 Controls:
 - Movement : Arrow Keys (LEFT, RIGHT, UP, DOWN)
@@ -19,7 +26,6 @@ I will be checking and reviewing issues on this project for potential bugs and w
 
 Currently this project is still in development, when it is done I will provide an update in this readme/description stating it is. As of right now the features that can be expected to be added are:
 
-- Aliens, these are enemies that fly across the screen in ufos and fire a single laser at the player, regular aliens give 5 score and golden ones give 50
 - Stars that appear in the background as visuals
 
 (Please note that these features are only expected to be added, they may not actually make it into the completed release. More expected features may be added later on.)
