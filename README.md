@@ -27,7 +27,7 @@ I will be checking and reviewing issues on this project for potential bugs and w
 
 Currently this project is still in development, when it is done I will provide an update in this readme/description stating it is. As of right now the features that can be expected to be added are:
 
-- Stars that appear in the background as visuals
+- Currently no new expected features, all added (yay!)
 
 (Please note that these features are only expected to be added, they may not actually make it into the completed release. More expected features may be added later on.)
 
