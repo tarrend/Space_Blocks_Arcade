@@ -261,7 +261,7 @@ class AlienLaser(pygame.sprite.Sprite):
 
         # movement
         self.position = position.copy()
-        self.speed = 250
+        self.speed = 600
 
         self.direction = player_position.copy() - position
         self.direction = self.direction.normalize()
