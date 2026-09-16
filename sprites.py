@@ -288,12 +288,29 @@ class Star(pygame.sprite.Sprite):
 
         # initial variables
 
-        self.image = pygame.Surface(35, 35)
+        self.image = pygame.Surface((36, 36))
         self.image.fill("yellow")
+        self.image.set_alpha(50)
+
+        self.rect = self.image.get_rect()
 
         # movement
-        self.position = pygame.Vector2(randint(0, WIDTH), (-60, -40))
-        self.speed = 75
+        self.position = pygame.Vector2(randint(0, WIDTH), randint(-60, -40))
+        self.speed = 200
+
+        self.rect.center = self.position
+
+    def movement(self, dt):
+        self.position.y += self.speed * dt
+        self.rect.center = self.position
+
+        # despawning
+        if self.position.y > HEIGHT + 50:
+            print("dead")
+            self.kill()
+
+    def update(self, dt):
+        self.movement(dt)
 
 class Explosion():
     def __init__(self, position):

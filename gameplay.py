@@ -14,6 +14,7 @@ laser_group = pygame.sprite.Group()
 meteor_group = pygame.sprite.Group()
 alien_group = pygame.sprite.GroupSingle()
 alien_laser_group = pygame.sprite.GroupSingle()
+star_group = pygame.sprite.Group()
 explosion_group = []
 
 # add player to their group
@@ -37,6 +38,10 @@ meteor_time = 0.2
 
 alien_timer = 0
 alien_time = 25
+
+star_timer = 0
+star_time = 0.4
+max_stars = 20
 
 # score
 score = 0
@@ -80,6 +85,17 @@ def timers(dt):
     else:
         alien_timer -= alien_time
         alien_group.add(sprites.Alien())
+
+    # stars
+
+    global star_timer
+
+    if len(star_group) < max_stars:
+        if star_timer < star_time:
+            star_timer += dt
+        else:
+            star_timer -= star_time
+            star_group.add(sprites.Star())
 
 def shoot(key_just, position):
     # shoot at this stage does not just cover player shooting
@@ -174,6 +190,7 @@ def updating(dt, key, key_just):
     meteor_group.update(dt)
     alien_group.update(dt)
     alien_laser_group.update(dt)
+    star_group.update(dt)
 
     # run the different game timers
     timers(dt)
@@ -197,6 +214,7 @@ def updating(dt, key, key_just):
 def rendering(screen):
 
     # rendering the different groups
+    star_group.draw(screen)
     player.display_extras(screen)
     player_group.draw(screen)
 
