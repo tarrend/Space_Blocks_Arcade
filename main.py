@@ -10,7 +10,7 @@ clock = pygame.time.Clock()
 dt = 0
 running = True
 
-import gameplay
+from gameplay import run
 
 
 # main loop
@@ -34,7 +34,7 @@ while running:
     key = pygame.key.get_pressed()
     key_just = pygame.key.get_just_pressed()
 
-    gameplay.run(screen, dt, key, key_just)
+    run(screen, dt, key, key_just)
 
     pygame.display.update()
 
