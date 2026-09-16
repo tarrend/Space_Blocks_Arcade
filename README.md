@@ -6,7 +6,7 @@ In this game you control a spaceship that can move around the screen, as this sp
 Rarely a meteor may be a golden one, these are more valuable giving more score.
 Regular meteors result in 1 score while golden meteors result in 10 score.
 
-Aliens will spawn every 25 seconds and fire a laser at the player at a certain point (unless they are destroyed before they are able to fire).
+Aliens will spawn every 25 seconds and fire a laser at the player at a certain point (unless they are destroyed before they are able to fire, their bullets are also extremely fast so beware).
 Aliens too also have a chance to be golden, regular aliens give 5 score while golden aliens give 50.
 
 Colliding with a laser that an alien fires also results in a loss of all score like colliding with a meteor.
