@@ -27,11 +27,11 @@ I will be checking and reviewing issues on this project for potential bugs and w
 
 Currently this project is still in development, when it is done I will provide an update in this readme/description stating it is. As of right now the features that can be expected to be added are:
 
+**Update: The core project is now finished, I will still be adding features to it ocassionally but it is now considered done**
+
 - Currently no new expected features, all added (yay!)
 
-(Please note that these features are only expected to be added, they may not actually make it into the completed release. More expected features may be added later on.)
-
-When this project is fully finished there may still be ocassional small updates added.
+Please note that these features (if there are any expected ones) are only expected to be added, they may not actually make it into the completed release. More expected features may be added later on.
 
 You are probably wondering why the name of this project is Space Blocks Arcade, well Space Blocks is a play on the words spaceships but the ships is replaced with Blocks, this is cause the game is largely made of basic Blocks. Arcade cause I thought the game was quite arcade style.
 
