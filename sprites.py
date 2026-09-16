@@ -290,7 +290,7 @@ class Star(pygame.sprite.Sprite):
 
         self.image = pygame.Surface((36, 36))
         self.image.fill("yellow")
-        self.image.set_alpha(50)
+        self.image.set_alpha(128)
 
         self.rect = self.image.get_rect()
 
@@ -300,14 +300,50 @@ class Star(pygame.sprite.Sprite):
 
         self.rect.center = self.position
 
+        # custom parts
+        self.star_segment = pygame.Surface((12, 12))
+        self.star_segment.fill("yellow")
+        self.star_segment.set_alpha(128)
+
+        self.star_segment_2 = self.create_segment_copy()
+        self.star_segment_3 = self.create_segment_copy()
+        self.star_segment_4 = self.create_segment_copy()
+
+        self.star_segment_rect = self.star_segment.get_rect()
+        self.star_segment_rect_2 = self.create_segment_rect_copy()
+        self.star_segment_rect_3 = self.create_segment_rect_copy()
+        self.star_segment_rect_4 = self.create_segment_rect_copy()
+
+        self.set_segments_positions()
+
+    def create_segment_copy(self):
+        return self.star_segment.copy()
+
+    def create_segment_rect_copy(self):
+        return self.star_segment_rect.copy()
+
+    def set_segments_positions(self):
+        # order is top, right, bottom, left
+        self.star_segment_rect.midbottom = pygame.Vector2(self.position.x, self.position.y-18)
+        self.star_segment_rect_2.midleft = pygame.Vector2(self.position.x+18, self.position.y)
+        self.star_segment_rect_3.midtop = pygame.Vector2(self.position.x, self.position.y+18)
+        self.star_segment_rect_4.midright = pygame.Vector2(self.position.x-18, self.position.y)
+
     def movement(self, dt):
         self.position.y += self.speed * dt
         self.rect.center = self.position
 
         # despawning
         if self.position.y > HEIGHT + 50:
-            print("dead")
             self.kill()
+
+        self.set_segments_positions()
+
+    def display_extras(self, screen):
+        screen.blit(self.star_segment, self.star_segment_rect)
+        screen.blit(self.star_segment_2, self.star_segment_rect_2)
+        screen.blit(self.star_segment_3, self.star_segment_rect_3)
+        screen.blit(self.star_segment_4, self.star_segment_rect_4)
 
     def update(self, dt):
         self.movement(dt)

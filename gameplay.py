@@ -215,6 +215,8 @@ def rendering(screen):
 
     # rendering the different groups
     star_group.draw(screen)
+    for star in star_group.sprites():
+        star.display_extras(screen)
     player.display_extras(screen)
     player_group.draw(screen)
 
