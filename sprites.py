@@ -293,7 +293,7 @@ class Star(pygame.sprite.Sprite):
 
         # movement
         self.position = pygame.Vector2(randint(0, WIDTH), (-60, -40))
-        self.speed = 200
+        self.speed = 75
 
 class Explosion():
     def __init__(self, position):
