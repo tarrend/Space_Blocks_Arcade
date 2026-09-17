@@ -29,7 +29,7 @@ Currently this project is still in development, when it is done I will provide a
 
 **Update: The core project is now finished, I will still be adding features to it ocassionally but it is now considered done**
 
-- PowerUps (Pick up items that increase the speed, reload time and sizer of bullets for the player)
+- PowerUps (Pick up items that increase the speed, reload time and sizer of laser for the player)
 
 Please note that these features (if there are any expected ones) are only expected to be added, they may not actually make it into the completed release. More expected features may be added later on.
 

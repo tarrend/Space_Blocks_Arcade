@@ -348,6 +348,37 @@ class Star(pygame.sprite.Sprite):
     def update(self, dt):
         self.movement(dt)
 
+class PowerUpObject(pygame.sprite.Sprite):
+    def __init__(self, position):
+        super().__init__()
+
+        # initial variables
+
+        # choose a random power up type
+        self.power_type = randint(1, 3)
+
+        # 1 = Movement Speed
+        # 2 = Reload Speed
+        # 3 = Laser Size Increase
+
+        self.image = pygame.Surface((40, 40))
+
+        match self.power_type:
+            case 1:
+                self.image.fill("red")
+            case 2:
+                self.image.fill("green")
+            case 3:
+                self.image.fill("blue")
+
+        self.rect = self.image.get_rect()
+
+        # related to movement
+        self.speed = 150
+        self.position = position
+
+        self.rect.center = self.position
+
 class Explosion():
     def __init__(self, position):
         # this is very important to note
