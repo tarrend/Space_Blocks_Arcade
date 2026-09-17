@@ -47,6 +47,11 @@ max_stars = 20
 power_up_spawn_timer = 0
 power_up_spawn_time = 60
 
+power_up_timer = 0
+power_up_time = 15
+power_up_active = False
+power_up_type = 0
+
 # score
 score = 0
 
