@@ -355,7 +355,7 @@ class PowerUp(pygame.sprite.Sprite):
         # initial variables
 
         # choose a random power up type
-        self.power_type = randint(1, 3)
+        self.power_up_type = randint(1, 3)
 
         # 1 = Movement Speed
         # 2 = Reload Speed

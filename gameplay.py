@@ -15,7 +15,7 @@ meteor_group = pygame.sprite.Group()
 alien_group = pygame.sprite.GroupSingle()
 alien_laser_group = pygame.sprite.GroupSingle()
 star_group = pygame.sprite.Group()
-power_up_group = pygame.sprite.Group()
+power_up_group = pygame.sprite.GroupSingle()
 explosion_group = []
 
 # add player to their group
@@ -164,6 +164,17 @@ def collisions():
     player_alien_laser_collision = pygame.sprite.spritecollideany(player, alien_laser_group)
     if player_alien_laser_collision:
         player_collision_lose(player)
+
+    # collision between player and power ups
+
+    global power_up_active
+    global power_up_type
+
+    power_up = power_up_group.sprite
+    player_power_up_collision = pygame.sprite.collide_rect(player, power_up)
+    if player_power_up_collision:
+        power_up_active = True
+        power_up_type = power_up.power_up_type
         
 
 def player_collision_lose(player):
