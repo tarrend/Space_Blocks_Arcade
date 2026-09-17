@@ -195,8 +195,6 @@ def player_collision_gain(collisions, default_amount, gold_amount):
 
             explosion_group.append(sprites.Explosion(object.position))
 
-
-
 def updating(dt, key, key_just):
 
     # the reason why screen is passed here is because the explosions require it
