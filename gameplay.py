@@ -15,6 +15,7 @@ meteor_group = pygame.sprite.Group()
 alien_group = pygame.sprite.GroupSingle()
 alien_laser_group = pygame.sprite.GroupSingle()
 star_group = pygame.sprite.Group()
+power_up_group = pygame.sprite.Group()
 explosion_group = []
 
 # add player to their group
@@ -191,6 +192,7 @@ def updating(dt, key, key_just):
     alien_group.update(dt)
     alien_laser_group.update(dt)
     star_group.update(dt)
+    power_up_group.update(dt)
 
     # run the different game timers
     timers(dt)
@@ -229,10 +231,11 @@ def rendering(screen):
 
     alien_laser_group.draw(screen)
 
+    power_up_group.draw(screen)
+
+
     # displaying different text
     screen.blit(title_text_surface, title_text_rect)
-
-
     # score text
     score_surface = size_35_font.render("Score: " + str(score), True, "#fcea42")
     screen.blit(score_surface, pygame.Vector2(50, 50))

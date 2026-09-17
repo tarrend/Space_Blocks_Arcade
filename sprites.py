@@ -348,7 +348,7 @@ class Star(pygame.sprite.Sprite):
     def update(self, dt):
         self.movement(dt)
 
-class PowerUpObject(pygame.sprite.Sprite):
+class PowerUp(pygame.sprite.Sprite):
     def __init__(self, position):
         super().__init__()
 
@@ -378,6 +378,9 @@ class PowerUpObject(pygame.sprite.Sprite):
         self.position = position
 
         self.rect.center = self.position
+
+    def update(self, dt):
+        pass
 
 class Explosion():
     def __init__(self, position):
