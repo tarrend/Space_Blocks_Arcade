@@ -379,8 +379,17 @@ class PowerUp(pygame.sprite.Sprite):
 
         self.rect.center = self.position
 
+    def movement(self, dt):
+        self.position.y += self.speed * dt
+
+        # despawn if off screen
+        if self.position.y > HEIGHT + 50:
+            self.kill()
+
+        self.rect.center = self.position
+
     def update(self, dt):
-        pass
+        self.movement(dt)
 
 class Explosion():
     def __init__(self, position):
