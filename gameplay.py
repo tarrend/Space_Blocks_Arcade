@@ -1,5 +1,5 @@
 import pygame
-from random import uniform
+from random import randint, uniform
 from constants import *
 import sprites
 
@@ -43,6 +43,9 @@ alien_time = 25
 star_timer = 0
 star_time = 0.4
 max_stars = 20
+
+power_up_timer = 0
+power_up_time = 60
 
 # score
 score = 0
@@ -97,6 +100,16 @@ def timers(dt):
         else:
             star_timer -= star_time
             star_group.add(sprites.Star())
+
+    # power ups
+
+    global power_up_timer
+
+    if power_up_timer < power_up_time:
+        power_up_timer += dt
+    else:
+        power_up_timer -= power_up_time
+        power_up_group.add(sprites.PowerUp(pygame.Vector2(randint(0, WIDTH), -80)))
 
 def shoot(key_just, position):
     # shoot at this stage does not just cover player shooting
