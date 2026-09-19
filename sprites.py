@@ -140,7 +140,9 @@ class Laser(pygame.sprite.Sprite):
 
         # initial variables
 
-        self.image = pygame.Surface((10, 50))
+        self.size = (10, 50)
+
+        self.image = pygame.Surface(self.size)
         self.image.fill("#ffdd30")
         self.rect = self.image.get_rect()
 
@@ -149,6 +151,8 @@ class Laser(pygame.sprite.Sprite):
         self.speed = 800
 
         self.rect.center = self.position
+
+        print(self.size)
 
     def movement(self, dt):
 

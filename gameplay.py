@@ -146,6 +146,8 @@ def apply_power_ups():
     match power_up_type:
         case 1:
             player.speed = 375
+        case 2:
+            sprites.Laser.size = (30, 150)
 
 def reset_power_ups():
 
@@ -153,7 +155,7 @@ def reset_power_ups():
 
     if player.speed > 250:
         player.speed = 250
-            
+
 
 def shoot(key_just, position):
     # shoot at this stage does not just cover player shooting
