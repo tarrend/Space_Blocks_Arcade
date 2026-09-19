@@ -363,7 +363,7 @@ class PowerUp(pygame.sprite.Sprite):
 
         self.image = pygame.Surface((40, 40))
 
-        match self.power_type:
+        match self.power_up_type:
             case 1:
                 self.image.fill("red")
             case 2:

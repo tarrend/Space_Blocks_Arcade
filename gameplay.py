@@ -106,7 +106,7 @@ def timers(dt):
             star_timer -= star_time
             star_group.add(sprites.Star())
 
-    # power ups
+    # power ups spawning
 
     global power_up_spawn_timer
 
@@ -115,6 +115,19 @@ def timers(dt):
     else:
         power_up_spawn_timer -= power_up_spawn_time
         power_up_group.add(sprites.PowerUp(pygame.Vector2(randint(0, WIDTH), -80)))
+
+    # power up apply time
+
+    global power_up_timer
+    global power_up_active
+
+    if power_up_active:
+        if power_up_timer < power_up_time:
+            power_up_timer += dt
+        else:
+            power_up_timer -= power_up_time
+            power_up_active = False
+
 
 def shoot(key_just, position):
     # shoot at this stage does not just cover player shooting
@@ -171,10 +184,12 @@ def collisions():
     global power_up_type
 
     power_up = power_up_group.sprite
-    player_power_up_collision = pygame.sprite.collide_rect(player, power_up)
-    if player_power_up_collision:
-        power_up_active = True
-        power_up_type = power_up.power_up_type
+    if power_up:
+        player_power_up_collision = pygame.sprite.collide_rect(player, power_up)
+        if player_power_up_collision:
+            power_up_active = True
+            power_up_type = power_up.power_up_type
+            power_up.kill()
         
 
 def player_collision_lose(player):
