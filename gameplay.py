@@ -322,6 +322,10 @@ def rendering(screen):
 
     power_up_group.draw(screen)
 
+    # handling explosion
+    for explosion in explosion_group:
+        explosion.draw(screen)
+
 
     # displaying different text
     screen.blit(title_text_surface, title_text_rect)
@@ -347,10 +351,16 @@ def rendering(screen):
         ability_text_surface = size_35_font.render(ability_text, True, power_up_colour)
         screen.blit(ability_text_surface, pygame.Vector2(50, 150))
 
-    # handling explosion
-    for explosion in explosion_group:
-        explosion.draw(screen)
+    # timer text for aliens and power ups
+    alien_spawn_time = alien_time - alien_timer
+    alien_spawn_text = f"Next Alien... ({alien_spawn_time:.1f})"
+    alien_spawn_surface = size_35_font.render(alien_spawn_text, True, "#e3dfd5")
+    screen.blit(alien_spawn_surface, pygame.Vector2(50, 200))
 
+    ability_spawn_time = power_up_spawn_time - power_up_spawn_timer
+    ability_spawn_text = f"Next Power Up... ({ability_spawn_time:.1f})"
+    ability_spawn_surface = size_35_font.render(ability_spawn_text, True, "#ffdabf")
+    screen.blit(ability_spawn_surface, pygame.Vector2(50, 250))
 
 
 def run(screen, dt, key, key_just):
