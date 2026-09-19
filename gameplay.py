@@ -1,5 +1,5 @@
 import pygame
-from random import uniform
+from random import randint, uniform
 from constants import *
 import sprites
 
@@ -15,6 +15,7 @@ meteor_group = pygame.sprite.Group()
 alien_group = pygame.sprite.GroupSingle()
 alien_laser_group = pygame.sprite.GroupSingle()
 star_group = pygame.sprite.Group()
+power_up_group = pygame.sprite.GroupSingle()
 explosion_group = []
 
 # add player to their group
@@ -42,6 +43,17 @@ alien_time = 25
 star_timer = 0
 star_time = 0.4
 max_stars = 20
+
+power_up_spawn_timer = 0
+power_up_spawn_time = 60
+
+power_up_timer = 0
+power_up_time = 15
+power_up_active = False
+power_up_type = 0
+power_up_handled = False
+
+power_up_colour = "red"
 
 # score
 score = 0
@@ -97,6 +109,64 @@ def timers(dt):
             star_timer -= star_time
             star_group.add(sprites.Star())
 
+    # power ups spawning
+
+    global power_up_spawn_timer
+
+    if power_up_spawn_timer < power_up_spawn_time:
+        power_up_spawn_timer += dt
+    else:
+        power_up_spawn_timer -= power_up_spawn_time
+        power_up_group.add(sprites.PowerUp(pygame.Vector2(randint(0, WIDTH), -80)))
+
+    # power up apply time
+
+    global power_up_timer
+    global power_up_type
+    global power_up_active
+    global power_up_handled
+
+    if power_up_active:
+        if power_up_timer < power_up_time:
+            if not power_up_handled:
+                apply_power_ups()
+                power_up_handled = True
+            power_up_timer += dt
+        else:
+            reset_power_ups()
+            power_up_type = 0
+            power_up_timer = 0
+            power_up_active = False
+            power_up_handled = False
+
+def apply_power_ups():
+
+    player = player_group.sprite
+
+    match power_up_type:
+        case 1:
+            player.speed = 375
+        case 2:
+            sprites.Laser.size_multiplier = 2
+        case 3:
+            global shoot_time
+            shoot_time = 0.5
+
+def reset_power_ups():
+
+    player = player_group.sprite
+
+    if player.speed > 250:
+        player.speed = 250
+
+    if sprites.Laser.size_multiplier > 1:
+        sprites.Laser.size_multiplier = 1
+
+    global shoot_time
+    if shoot_time < 1:
+        shoot_time = 1
+
+
 def shoot(key_just, position):
     # shoot at this stage does not just cover player shooting
     # it also covers the aliens being able to shoot
@@ -145,6 +215,28 @@ def collisions():
     player_alien_laser_collision = pygame.sprite.spritecollideany(player, alien_laser_group)
     if player_alien_laser_collision:
         player_collision_lose(player)
+
+    # collision between player and power ups
+
+    global power_up_active
+    global power_up_type
+    global power_up_colour
+
+    power_up = power_up_group.sprite
+    if power_up:
+        player_power_up_collision = pygame.sprite.collide_rect(player, power_up)
+        if player_power_up_collision:
+            power_up_active = True
+            power_up_type = power_up.power_up_type
+            match power_up_type:
+                case 1:
+                    power_up_colour = "red"
+                case 2:
+                    power_up_colour = "green"
+                case 3:
+                    power_up_colour = "blue"
+
+            power_up.kill()
         
 
 def player_collision_lose(player):
@@ -176,8 +268,6 @@ def player_collision_gain(collisions, default_amount, gold_amount):
 
             explosion_group.append(sprites.Explosion(object.position))
 
-
-
 def updating(dt, key, key_just):
 
     # the reason why screen is passed here is because the explosions require it
@@ -191,6 +281,7 @@ def updating(dt, key, key_just):
     alien_group.update(dt)
     alien_laser_group.update(dt)
     star_group.update(dt)
+    power_up_group.update(dt)
 
     # run the different game timers
     timers(dt)
@@ -229,10 +320,11 @@ def rendering(screen):
 
     alien_laser_group.draw(screen)
 
+    power_up_group.draw(screen)
+
+
     # displaying different text
     screen.blit(title_text_surface, title_text_rect)
-
-
     # score text
     score_surface = size_35_font.render("Score: " + str(score), True, "#fcea42")
     screen.blit(score_surface, pygame.Vector2(50, 50))
@@ -242,9 +334,18 @@ def rendering(screen):
         reloading_time = shoot_time - shoot_timer
         if reloading_time <= 0:
             reloading_time = 0
-        reloading_text_text = f"Reloading... ({reloading_time:.1f})"
-        reloading_text_surface = size_35_font.render(reloading_text_text, True, "#c90e1e")
+        reloading_text = f"Reloading... ({reloading_time:.1f})"
+        reloading_text_surface = size_35_font.render(reloading_text, True, "#c90e1e")
         screen.blit(reloading_text_surface, pygame.Vector2(50, 100))
+
+    # ability text
+    if power_up_active:
+        ability_time = power_up_time - power_up_timer
+        if ability_time <= 0:
+            ability_time = 0
+        ability_text = f"Power Time Left... ({ability_time:.1f})"
+        ability_text_surface = size_35_font.render(ability_text, True, power_up_colour)
+        screen.blit(ability_text_surface, pygame.Vector2(50, 150))
 
     # handling explosion
     for explosion in explosion_group:

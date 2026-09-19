@@ -135,12 +135,15 @@ class Meteor(pygame.sprite.Sprite):
         self.movement(dt)
 
 class Laser(pygame.sprite.Sprite):
+
+    size_multiplier = 1
+
     def __init__(self, position):
         super().__init__()
 
         # initial variables
 
-        self.image = pygame.Surface((10, 50))
+        self.image = pygame.Surface((10*Laser.size_multiplier, 50*Laser.size_multiplier))
         self.image.fill("#ffdd30")
         self.rect = self.image.get_rect()
 
@@ -344,6 +347,49 @@ class Star(pygame.sprite.Sprite):
         screen.blit(self.star_segment_2, self.star_segment_rect_2)
         screen.blit(self.star_segment_3, self.star_segment_rect_3)
         screen.blit(self.star_segment_4, self.star_segment_rect_4)
+
+    def update(self, dt):
+        self.movement(dt)
+
+class PowerUp(pygame.sprite.Sprite):
+    def __init__(self, position):
+        super().__init__()
+
+        # initial variables
+
+        # choose a random power up type
+        self.power_up_type = randint(1, 3)
+
+        # 1 = Movement Speed
+        # 2 = Reload Speed
+        # 3 = Laser Size Increase
+
+        self.image = pygame.Surface((40, 40))
+
+        match self.power_up_type:
+            case 1:
+                self.image.fill("red")
+            case 2:
+                self.image.fill("green")
+            case 3:
+                self.image.fill("blue")
+
+        self.rect = self.image.get_rect()
+
+        # related to movement
+        self.speed = 150
+        self.position = position
+
+        self.rect.center = self.position
+
+    def movement(self, dt):
+        self.position.y += self.speed * dt
+
+        # despawn if off screen
+        if self.position.y > HEIGHT + 50:
+            self.kill()
+
+        self.rect.center = self.position
 
     def update(self, dt):
         self.movement(dt)
