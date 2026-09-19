@@ -38,7 +38,7 @@ meteor_timer = 0
 meteor_time = 0.2
 
 alien_timer = 0
-alien_time = 25
+alien_time = 30
 
 star_timer = 0
 star_time = 0.4
