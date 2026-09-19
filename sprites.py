@@ -136,14 +136,14 @@ class Meteor(pygame.sprite.Sprite):
 
 class Laser(pygame.sprite.Sprite):
 
-    size = (10, 50)
+    size_multiplier = 1
 
     def __init__(self, position):
         super().__init__()
 
         # initial variables
 
-        self.image = pygame.Surface(Laser.size)
+        self.image = pygame.Surface((10*Laser.size_multiplier, 50*Laser.size_multiplier))
         self.image.fill("#ffdd30")
         self.rect = self.image.get_rect()
 
@@ -152,8 +152,6 @@ class Laser(pygame.sprite.Sprite):
         self.speed = 800
 
         self.rect.center = self.position
-
-        print(self.size)
 
     def movement(self, dt):
 
