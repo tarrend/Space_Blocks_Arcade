@@ -6,10 +6,16 @@ In this game you control a spaceship that can move around the screen, as this sp
 Rarely a meteor may be a golden one, these are more valuable giving more score.
 Regular meteors result in 1 score while golden meteors result in 10 score.
 
-Aliens will spawn every 25 seconds and fire a laser at the player at a certain point (unless they are destroyed before they are able to fire, their bullets are also extremely fast so beware).
+Aliens will spawn every 30 seconds and fire a laser at the player at a certain point (unless they are destroyed before they are able to fire, their bullets are also extremely fast so beware).
 Aliens too also have a chance to be golden, regular aliens give 5 score while golden aliens give 50.
 
 Colliding with a laser that an alien fires also results in a loss of all score like colliding with a meteor.
+
+Every 60 Seconds a random power up will spawn, they have an effect that lasts 15 seconds. 
+
+- The Red Power Up increases movespeed
+- The Green Power Up increase bullet size
+- The Blue Power Up increases reload time
 
 (The gameplay entry will be updated when new gameplay mechanics are added or changed)
 
