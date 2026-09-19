@@ -45,13 +45,15 @@ star_time = 0.4
 max_stars = 20
 
 power_up_spawn_timer = 0
-power_up_spawn_time = 2
+power_up_spawn_time = 60
 
 power_up_timer = 0
 power_up_time = 15
 power_up_active = False
 power_up_type = 0
 power_up_handled = False
+
+power_up_colour = "red"
 
 # score
 score = 0
@@ -206,6 +208,7 @@ def collisions():
 
     global power_up_active
     global power_up_type
+    global power_up_colour
 
     power_up = power_up_group.sprite
     if power_up:
@@ -213,6 +216,14 @@ def collisions():
         if player_power_up_collision:
             power_up_active = True
             power_up_type = power_up.power_up_type
+            match power_up_type:
+                case 1:
+                    power_up_colour = "red"
+                case 2:
+                    power_up_colour = "green"
+                case 3:
+                    power_up_colour = "blue"
+
             power_up.kill()
         
 
@@ -311,9 +322,18 @@ def rendering(screen):
         reloading_time = shoot_time - shoot_timer
         if reloading_time <= 0:
             reloading_time = 0
-        reloading_text_text = f"Reloading... ({reloading_time:.1f})"
-        reloading_text_surface = size_35_font.render(reloading_text_text, True, "#c90e1e")
+        reloading_text = f"Reloading... ({reloading_time:.1f})"
+        reloading_text_surface = size_35_font.render(reloading_text, True, "#c90e1e")
         screen.blit(reloading_text_surface, pygame.Vector2(50, 100))
+
+    # ability text
+    if power_up_active:
+        ability_time = power_up_time - power_up_timer
+        if ability_time <= 0:
+            ability_time = 0
+        ability_text = f"Power Time Left... ({ability_time:.1f})"
+        ability_text_surface = size_35_font.render(ability_text, True, power_up_colour)
+        screen.blit(ability_text_surface, pygame.Vector2(50, 150))
 
     # handling explosion
     for explosion in explosion_group:
