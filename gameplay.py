@@ -45,7 +45,7 @@ star_time = 0.4
 max_stars = 20
 
 power_up_spawn_timer = 0
-power_up_spawn_time = 60
+power_up_spawn_time = 5
 
 power_up_timer = 0
 power_up_time = 15
@@ -147,7 +147,7 @@ def apply_power_ups():
         case 1:
             player.speed = 375
         case 2:
-            sprites.Laser.size = (30, 150)
+            sprites.Laser.size = (50, 100)
 
 def reset_power_ups():
 
@@ -155,6 +155,9 @@ def reset_power_ups():
 
     if player.speed > 250:
         player.speed = 250
+
+    if sprites.Laser.size != (10, 50):
+        sprites.Laser.size = (10, 50)
 
 
 def shoot(key_just, position):
