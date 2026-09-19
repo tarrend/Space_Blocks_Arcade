@@ -45,12 +45,13 @@ star_time = 0.4
 max_stars = 20
 
 power_up_spawn_timer = 0
-power_up_spawn_time = 60
+power_up_spawn_time = 2
 
 power_up_timer = 0
 power_up_time = 15
 power_up_active = False
 power_up_type = 0
+power_up_handled = False
 
 # score
 score = 0
@@ -119,15 +120,38 @@ def timers(dt):
     # power up apply time
 
     global power_up_timer
+    global power_up_type
     global power_up_active
+    global power_up_handled
 
     if power_up_active:
         if power_up_timer < power_up_time:
+            if not power_up_handled:
+                apply_power_ups()
+                power_up_handled = True
             power_up_timer += dt
         else:
-            power_up_timer -= power_up_time
+            reset_power_ups()
+            power_up_type = 0
+            power_up_timer = 0
             power_up_active = False
+            power_up_handled = False
 
+def apply_power_ups():
+
+    player = player_group.sprite
+
+    match power_up_type:
+        case 1:
+            player.speed = 375
+
+def reset_power_ups():
+
+    player = player_group.sprite
+
+    if player.speed > 250:
+        player.speed = 250
+            
 
 def shoot(key_just, position):
     # shoot at this stage does not just cover player shooting
