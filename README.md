@@ -59,7 +59,7 @@ pip3 install pygame-ce
 ```bash
 python main.py
 ```
-(Same case here it may be python3)
+(Same case here, it may be python3)
 ```bash
 python3 main.py
 ```
