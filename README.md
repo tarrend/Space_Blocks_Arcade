@@ -51,5 +51,8 @@ You are probably wondering why the name of this project is Space Blocks Arcade, 
 pip install pygame-ce 
 ```
 (Depending on your OS pip might be pip3!)
+```bash
+pip3 install pygame-ce
+```
 
 3. Run the main.py file
