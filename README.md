@@ -42,3 +42,14 @@ Please note that these features (if there are any expected ones) are only expect
 You are probably wondering why the name of this project is Space Blocks Arcade, well Space Blocks is a play on the words spaceships but the ships is replaced with Blocks, this is cause the game is largely made of basic Blocks. Arcade cause I thought the game was quite arcade style.
 
 **This project requires pygame-ce to run.**
+
+**How to set up:**
+1. Clone or download the code in this repository
+
+2. Install pygame-ce:
+```bash
+pip install pygame-ce 
+```
+(Depending on your OS pip might be pip3!)
+
+3. Run the main.py file
