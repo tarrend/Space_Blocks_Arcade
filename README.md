@@ -56,3 +56,10 @@ pip3 install pygame-ce
 ```
 
 3. Run the main.py file
+```bash
+python main.py
+```
+(Same case here it may be python3)
+```bash
+python3 main.py
+```
