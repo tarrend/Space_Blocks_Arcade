@@ -55,7 +55,7 @@ pip install pygame-ce
 pip3 install pygame-ce
 ```
 
-3. Run the main.py file
+3. Run the main.py file:
 ```bash
 python main.py
 ```
